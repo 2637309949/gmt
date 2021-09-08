@@ -12,15 +12,19 @@ type Response struct {
 }
 
 func (r *Response) Build(data proto.Message, err error) error {
-	code := 200
-	r.StatusCode = 200
+	var x []byte
 	if err != nil {
-		code = 500
+		x, _ = json.Marshal(map[string]interface{}{
+			"code": 500,
+			"msg":  err.Error(),
+		})
+	} else {
+		x, _ = json.Marshal(map[string]interface{}{
+			"code": 200,
+			"data": data,
+		})
 	}
-	x, err := json.Marshal(map[string]interface{}{
-		"code": code,
-		"data": data,
-	})
+	r.StatusCode = 200
 	r.Body = string(x)
 	return err
 }

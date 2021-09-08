@@ -14,6 +14,7 @@ func (h *Handler) Call(ctx context.Context, req *go_api.Request, rsp *go_api.Res
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.Request{}
 	if err := request.Bind(&r); err != nil {
+		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
 	return response.Build(h.HelloworldClient.Call(ctx, &r))

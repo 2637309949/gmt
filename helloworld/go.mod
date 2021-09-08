@@ -9,5 +9,4 @@ require (
 )
 
 replace proto => ../proto
-
 replace comm => ../comm

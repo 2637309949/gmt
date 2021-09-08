@@ -1,10 +1,11 @@
 package micro
 
 import (
-	"comm/go-micro/conf"
+	"comm/conf"
 	"strings"
 
 	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/client"
 	"github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/cache"
@@ -53,7 +54,7 @@ func Metadata(md map[string]string) micro.Option {
 
 // NewServiceWithName defined TODO
 func NewServiceWithName(name string) micro.Service {
-	return NewService(Name(NameFormat(name)))
+	return NewService(Name(name))
 }
 
 // NewService creates and returns a new Service based on the packages within.
@@ -68,6 +69,11 @@ func NewService(opts ...micro.Option) micro.Service {
 	srv := micro.NewService(opts...)
 	defer srv.Init()
 	return srv
+}
+
+// NewEvent creates a new event publisher
+func NewEvent(topic string, c client.Client) micro.Event {
+	return micro.NewEvent(topic, c)
 }
 
 // RegisterHandler is syntactic sugar for registering a handler

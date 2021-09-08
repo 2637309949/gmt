@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"comm/go-micro"
-	"comm/go-micro/logger"
+	"comm/logger"
+	"comm/micro"
 	"context"
 	"encoding/json"
 	"proto/helloworld"

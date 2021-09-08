@@ -5,14 +5,14 @@ import (
 	"helloworld/srv/subscriber"
 	"proto/helloworld"
 
-	"comm/go-micro"
-	"comm/go-micro/logger"
+	"comm/logger"
+	"comm/micro"
 )
 
 func main() {
-	app := micro.NewServiceWithName("srv.helloworld")
+	app := micro.NewServiceWithName(micro.NameFormat("srv.helloworld"))
 	helloworld.RegisterHelloworldHandler(app.Server(), new(handler.Handler))
-	micro.RegisterSubscriber("srv.helloworld", app.Server(), new(subscriber.Subscriber))
+	micro.RegisterSubscriber(micro.NameFormat("srv.helloworld"), app.Server(), new(subscriber.Subscriber))
 	if err := app.Run(); err != nil {
 		logger.Fatal(err)
 	}

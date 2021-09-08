@@ -9,7 +9,7 @@ import (
 
 var (
 	// Default logger
-	l logger.Logger = logger.DefaultLogger
+	l logger.Logger = logger.NewHelper(logger.NewLogger())
 )
 
 func Out() io.Writer {

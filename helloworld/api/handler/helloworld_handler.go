@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received api.helloworld.call request")
+	logger.Info("Received api.helloworld.ArticleAdd request")
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.Article{}
 	if err := request.Bind(&r); err != nil {
@@ -21,7 +21,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_a
 }
 
 func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received api.helloworld.call request")
+	logger.Info("Received api.helloworld.ArticleDel request")
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.ArticleFilter{}
 	if err := request.Bind(&r); err != nil {
@@ -32,7 +32,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_a
 }
 
 func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received api.helloworld.call request")
+	logger.Info("Received api.helloworld.ArticleUpdate request")
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.Article{}
 	if err := request.Bind(&r); err != nil {
@@ -43,7 +43,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *g
 }
 
 func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received api.helloworld.call request")
+	logger.Info("Received api.helloworld.ArticleOne request")
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.ArticleFilter{}
 	if err := request.Bind(&r); err != nil {
@@ -54,7 +54,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_a
 }
 
 func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received api.helloworld.call request")
+	logger.Info("Received api.helloworld.ArticlePage request")
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
 	r := helloworld.ArticleFilter{}
 	if err := request.Bind(&r); err != nil {

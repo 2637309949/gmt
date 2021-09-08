@@ -8,6 +8,6 @@ import (
 )
 
 func (s *Subscriber) Handle(ctx context.Context, msg *helloworld.Message) error {
-	logger.Info("Handler Received message: ", msg.Say)
+	logger.Info("Received srv.helloworld.Subscriber request")
 	return nil
 }

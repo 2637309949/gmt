@@ -5,5 +5,9 @@ package helloworld;
 import "helloworld/helloworld.proto";
 
 service Helloworld {
-	rpc Call(Request) returns (Response) {}
+	rpc ArticleAdd(Article) returns (Article) {}
+    rpc ArticleDel(ArticleFilter) returns (Article) {}
+    rpc ArticleUpdate(Article) returns (Article) {}
+    rpc ArticleOne(ArticleFilter) returns (Article) {}
+    rpc ArticlePage(ArticleFilter) returns (ArticleList) {}
 }

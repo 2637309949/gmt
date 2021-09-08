@@ -7,9 +7,27 @@ import (
 	"proto/helloworld"
 )
 
-// Call is a single request handler called via client.Call or the generated client code
-func (h *Handler) Call(ctx context.Context, req *helloworld.Request, rsp *helloworld.Response) error {
+func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
 	logger.Info("Received Helloworld.Call request")
-	rsp.Msg = "Hello " + req.Name
+	return nil
+}
+
+func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.Article) error {
+	logger.Info("Received Helloworld.Call request")
+	return nil
+}
+
+func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
+	logger.Info("Received Helloworld.Call request")
+	return nil
+}
+
+func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.Article) error {
+	logger.Info("Received Helloworld.Call request")
+	return nil
+}
+
+func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.ArticleList) error {
+	logger.Info("Received Helloworld.Call request")
 	return nil
 }

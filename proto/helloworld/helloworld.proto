@@ -2,15 +2,35 @@ syntax = "proto3";
 
 package helloworld;
 
+message Article {
+    uint32 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+}
+
+message ArticleFilter {
+    uint32 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+}
+
+message ArticleList {
+	int32 page = 1 [json_name = "page"];
+	int32 size = 2 [json_name = "size"];
+	int32 total_records = 3 [json_name = "total_records"];
+	int32 total_pages = 4 [json_name = "total_pages"];
+    repeated Article data = 5 [json_name = "data"];
+}
+
 message Message {
 	string say = 1;
 }
-
-message Request {
-	string name = 1;
-}
-
-message Response {
-	string msg = 1;
-}
-

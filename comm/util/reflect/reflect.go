@@ -7,6 +7,9 @@ import (
 
 // IsBlank defined
 func IsBlank(v interface{}) bool {
+	if v == nil {
+		return true
+	}
 	value := reflect.ValueOf(v)
 	switch value.Kind() {
 	case reflect.String:

@@ -65,6 +65,11 @@ docker build -t micro:2.9.3 .
 # clean tmp
 rm -rf $tempdir
 
-# booting
+# booting micro
 docker run --env-file=.env -d --name=micro -p 8080:8080  micro:2.9.3 api 
 docker run --env-file=.env micro:2.9.3 list services
+
+# booting consul
+mkdir -p /etc/consul.d
+mkdir -p /data/consul
+docker run --name=consul -d -p 8500:8500 -v /etc/consul.d/:/etc/consul.d/ -v /data/consul:/data/consul consul:1.8.5 agent -server -ui -config-dir /etc/consul.d/ -data-dir=/data/consul -log-file=/data/consul/log

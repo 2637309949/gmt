@@ -3,7 +3,7 @@ syntax = "proto3";
 package helloworld;
 
 message Article {
-    uint32 id = 1 [json_name = "id"];
+    int64 id = 1 [json_name = "id"];
     int64  creater = 2 [json_name = "creater"];
     string create_time = 3 [json_name = "create_time"];
     int64  updater = 4 [json_name = "updater"];
@@ -14,7 +14,7 @@ message Article {
 }
 
 message ArticleFilter {
-    uint32 id = 1 [json_name = "id"];
+    int64 id = 1 [json_name = "id"];
 	int32 page = 2 [json_name = "page"];
 	int32 size = 3 [json_name = "size"];
 	int32 order = 4 [json_name = "order"];

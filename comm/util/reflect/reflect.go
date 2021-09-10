@@ -3,7 +3,14 @@ package reflect
 import (
 	"bytes"
 	"reflect"
+	"unsafe"
 )
+
+type visit struct {
+	a1  unsafe.Pointer
+	a2  unsafe.Pointer
+	typ reflect.Type
+}
 
 // IsBlank defined
 func IsBlank(v interface{}) bool {

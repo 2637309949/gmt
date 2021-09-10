@@ -5,12 +5,16 @@ import (
 	"comm/micro"
 	"errors"
 	"time"
-
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/xorm"
 	"github.com/xormplus/xorm/log"
 )
 
 var dbmap map[string]*xorm.Engine
+
+func init()  {
+	dbmap = map[string]*xorm.Engine{}
+}
 
 // InitDb defined TODO
 func InitDb(key string) (*xorm.Engine, error) {

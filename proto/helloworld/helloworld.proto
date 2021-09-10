@@ -15,19 +15,22 @@ message Article {
 
 message ArticleFilter {
     uint32 id = 1 [json_name = "id"];
-    int64  creater = 2 [json_name = "creater"];
-    string create_time = 3 [json_name = "create_time"];
-    int64  updater = 4 [json_name = "updater"];
-    string update_time = 5 [json_name = "update_time"];
-    string remark = 7 [json_name = "remark"];
-    string name = 8 [json_name = "name"];
+	int32 page = 2 [json_name = "page"];
+	int32 size = 3 [json_name = "size"];
+	int32 order = 4 [json_name = "order"];
+    int64  creater = 5 [json_name = "creater"];
+    string create_time = 6 [json_name = "create_time"];
+    int64  updater = 7 [json_name = "updater"];
+    string update_time = 8 [json_name = "update_time"];
+    string remark = 9 [json_name = "remark"];
+    string name = 10 [json_name = "name"];
 }
 
 message ArticleList {
 	int32 page = 1 [json_name = "page"];
 	int32 size = 2 [json_name = "size"];
-	int32 total_records = 3 [json_name = "total_records"];
-	int32 total_pages = 4 [json_name = "total_pages"];
+	int32 total_record = 3 [json_name = "total_record"];
+	int32 total_page = 4 [json_name = "total_page"];
     repeated Article data = 5 [json_name = "data"];
 }
 

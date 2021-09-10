@@ -15,9 +15,9 @@ message Article {
 
 message ArticleFilter {
     int64 id = 1 [json_name = "id"];
-	int32 page = 2 [json_name = "page"];
-	int32 size = 3 [json_name = "size"];
-	int32 order = 4 [json_name = "order"];
+	int64 page = 2 [json_name = "page"];
+	int64 size = 3 [json_name = "size"];
+	string order = 4 [json_name = "order"];
     int64  creater = 5 [json_name = "creater"];
     string create_time = 6 [json_name = "create_time"];
     int64  updater = 7 [json_name = "updater"];
@@ -27,10 +27,10 @@ message ArticleFilter {
 }
 
 message ArticleList {
-	int32 page = 1 [json_name = "page"];
-	int32 size = 2 [json_name = "size"];
-	int32 total_record = 3 [json_name = "total_record"];
-	int32 total_page = 4 [json_name = "total_page"];
+	int64 page = 1 [json_name = "page"];
+	int64 size = 2 [json_name = "size"];
+	int64 total_record = 3 [json_name = "total_record"];
+	int64 total_page = 4 [json_name = "total_page"];
     repeated Article data = 5 [json_name = "data"];
 }
 

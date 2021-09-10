@@ -157,8 +157,8 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticleFilter
 	}
 
 	marker.Mark("ArticlePageDb")
-	var totalRecord int32
-	var totalPage int32
+	var totalRecord int64
+	var totalPage int64
 	err = h.ArticlePageDb(ctx, db, &filter, &list, &totalRecord)
 	if err != nil {
 		logger.Errorf("InitDb %v", err)

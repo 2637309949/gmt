@@ -5,7 +5,6 @@ import (
 	"comm/micro/api"
 	"context"
 	"proto/helloworld"
-	"fmt"
 	go_api "github.com/micro/go-micro/v2/api/proto"
 )
 
@@ -61,6 +60,5 @@ func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	a, b := h.HelloworldClient.ArticlePage(ctx, &r)
 	return response.Build(h.HelloworldClient.ArticlePage(ctx, &r))
 }

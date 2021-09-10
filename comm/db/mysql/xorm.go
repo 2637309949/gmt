@@ -33,6 +33,7 @@ func InitDb(key string) (*xorm.Engine, error) {
 	logger := log.NewSimpleLogger(logger.Out())
 	logger.ShowSQL(true)
 
+	db.SetLogger(logger)
 	db.SetConnMaxLifetime(time.Duration(10) * time.Minute)
 	db.SetMaxIdleConns(15)
 	db.SetMaxOpenConns(50)

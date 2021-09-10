@@ -26,21 +26,11 @@ cat > main.go <<EOF
 package main
 
 import (
-	"github.com/micro/go-micro/v2/config/cmd"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/registry/cache"
-	"github.com/micro/go-plugins/registry/consul/v2"
-	entry "github.com/micro/micro/v2/cmd"
+	"comm/micro/cmd"
 )
 
-func init() {
-	cmd.DefaultRegistries["consul"] = func(opts ...registry.Option) registry.Registry {
-		return cache.New(consul.NewRegistry(opts...))
-	}
-}
-
 func main() {
-	entry.Init()
+	cmd.Init()
 }
 EOF
 cat > Dockerfile <<EOF
@@ -50,14 +40,14 @@ RUN apk --no-cache add gcc libtool musl-dev
 COPY . /
 WORKDIR /
 RUN go env -w GOPROXY=https://goproxy.cn,direct
-RUN go get github.com/micro/go-plugins/registry/consul/v2
+RUN go get github.com/2637309949/gmt
 RUN go build -a -installsuffix cgo -ldflags "-s -w -X github.com/micro/micro/v2/cmd.GitCommit=e60b2cac -X github.com/micro/micro/v2/cmd.GitTag=v2.9.3 -X github.com/micro/micro/v2/cmd.BuildDate=1631063201" -o micro
 ENTRYPOINT ["/micro"]
 EOF
 
 # build docker 
 go env -w GOPROXY=https://goproxy.cn,direct
-go get github.com/micro/go-plugins/registry/consul/v2
+go get github.com/2637309949/gmt
 go build -a -installsuffix cgo -ldflags "-s -w -X github.com/micro/micro/v2/cmd.GitCommit=e60b2cac -X github.com/micro/micro/v2/cmd.GitTag=v2.9.3 -X github.com/micro/micro/v2/cmd.BuildDate=1631063201" -o micro
 cp micro $GOPATH/bin
 docker build -t micro:2.9.3 .

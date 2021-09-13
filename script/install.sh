@@ -26,7 +26,7 @@ cat > main.go <<EOF
 package main
 
 import (
-	"comm/micro/cmd"
+	"github.com/micro/micro/v2/comm/micro/cmd"
 )
 
 func main() {
@@ -36,18 +36,21 @@ EOF
 cat > Dockerfile <<EOF
 FROM golang:1.13-alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-RUN apk --no-cache add gcc libtool musl-dev
+RUN apk --no-cache add git gcc libtool musl-dev
 COPY . /
 WORKDIR /
+RUN git clone https://github.com/2637309949/gmt.git
+RUN cp -rf gmt/comm / && rm comm/go.mod comm/go.sum
+RUN sed -i "s/comm\//github.com\/micro\/micro\/v2\/comm\//g" `find comm -name "*.go" | xargs grep "comm\/" -rl`
 RUN go env -w GOPROXY=https://goproxy.cn,direct
-RUN go get github.com/2637309949/gmt
 RUN go build -a -installsuffix cgo -ldflags "-s -w -X github.com/micro/micro/v2/cmd.GitCommit=e60b2cac -X github.com/micro/micro/v2/cmd.GitTag=v2.9.3 -X github.com/micro/micro/v2/cmd.BuildDate=1631063201" -o micro
 ENTRYPOINT ["/micro"]
 EOF
 
 # build docker 
+git clone https://github.com/2637309949/gmt.git $tempdir/gmt
+cp -rf $tempdir/gmt/comm $tempdir/micro
 go env -w GOPROXY=https://goproxy.cn,direct
-go get github.com/2637309949/gmt
 go build -a -installsuffix cgo -ldflags "-s -w -X github.com/micro/micro/v2/cmd.GitCommit=e60b2cac -X github.com/micro/micro/v2/cmd.GitTag=v2.9.3 -X github.com/micro/micro/v2/cmd.BuildDate=1631063201" -o micro
 cp micro $GOPATH/bin
 docker build -t micro:2.9.3 .

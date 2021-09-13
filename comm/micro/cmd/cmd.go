@@ -3,7 +3,6 @@ package cmd
 import (
 	"comm/conf"
 	"comm/jwt"
-	"fmt"
 	"net/http"
 	"regexp"
 

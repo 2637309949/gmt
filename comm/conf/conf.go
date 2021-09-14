@@ -5,14 +5,13 @@ import (
 	"comm/util"
 	"encoding/json"
 	"flag"
-	"fmt"
-	"log"
 	"os"
 	"strings"
 
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/reader"
 	"github.com/micro/go-plugins/config/source/consul/v2"
+	"github.com/netdata/go-orchestrator/logger"
 )
 
 var (
@@ -62,22 +61,20 @@ func Get(key ...string) reader.Value {
 		return r
 	}
 	r = conf.Get(key...)
+	gtv[k] = r
 
-	fmt.Println("----------------66", key)
-	fmt.Println("----------------66", string(r.Bytes()))
 	// Watch
 	go func(key string) {
 		w, err := conf.Watch(strings.Split(key, ".")...)
 		if err != nil {
-			log.Println(err)
+			logger.Error(err)
 		}
 		v, err := w.Next()
 		if err != nil {
-			log.Println(err)
+			logger.Error(err)
 		}
 		gtv[key] = v
 	}(k)
-	gtv[k] = r
 	return r
 }
 

@@ -2,12 +2,14 @@ package api
 
 import (
 	"comm/micro/bind"
+
 	go_api "github.com/micro/go-micro/v2/api/proto"
 )
 
 // Request defined TODO
 type Request struct {
 	*go_api.Request
+	User string
 }
 
 func (r *Request) Bind(i interface{}) error {
@@ -15,5 +17,10 @@ func (r *Request) Bind(i interface{}) error {
 }
 
 func NewRequest(r *go_api.Request) *Request {
-	return &Request{Request: r}
+	rr := Request{Request: r}
+	xUser := r.GetHeader()["x-user"]
+	if len(xUser.GetValues()) > 0 {
+		rr.User = xUser.GetValues()[0]
+	}
+	return &rr
 }

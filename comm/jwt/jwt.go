@@ -1,7 +1,6 @@
 package jwt
 
 import (
-	"comm/conf"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -13,8 +12,7 @@ type Claims struct {
 }
 
 // Decode defined TODO
-func Decode(raw string) (*Claims, error) {
-	jwtSecret := conf.Load("comm", "jwt_secret").String()
+func Decode(jwtSecret, raw string) (*Claims, error) {
 	t, err := jwt.ParseWithClaims(raw, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtSecret, nil
 	})
@@ -28,8 +26,7 @@ func Decode(raw string) (*Claims, error) {
 }
 
 // Encode defined TODO
-func Encode(issuer, user string, expireTime int64) (string, error) {
-	jwtSecret := conf.Load("comm", "jwt_secret").String()
+func Encode(jwtSecret, issuer, user string, expireTime int64) (string, error) {
 	claims := Claims{
 		User: user,
 		StandardClaims: jwt.StandardClaims{

@@ -7,10 +7,7 @@ import (
 	"github.com/micro/go-micro/v2/logger"
 )
 
-var (
-	// Default logger
-	l logger.Logger = logger.NewHelper(logger.NewLogger())
-)
+var l logger.Logger = logger.NewHelper(logger.NewLogger())
 
 func Out() io.Writer {
 	return l.Options().Out

@@ -18,35 +18,34 @@ func setRegistry(name string, rr func(opts ...registry.Option) registry.Registry
 	cfg.DefaultRegistries[name] = rr
 }
 
-func consulRegistry(opts ...registry.Option) registry.Registry {
-	return cache.New(consul.NewRegistry(opts...))
-}
-
-func authHandler(h http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		whiteList := conf.Load("comm", "jwt_white_list").StringList([]string{})
-		for i := range whiteList {
-			match, _ := regexp.MatchString(whiteList[i], r.URL.Path)
-			if match {
-				h.ServeHTTP(w, r)
-				return
-			}
-		}
-		dtk, e := jwt.Decode(r.Header.Get("Authorization"))
-		if e != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		r.Header.Set("x-user", dtk.User)
-		h.ServeHTTP(w, r)
-	})
-}
-
-func init() {
-	plugin.Register(plugin.NewPlugin(plugin.WithName("jwt"), plugin.WithHandler(authHandler)))
-	setRegistry("consul", consulRegistry)
+func setPlugin(name string, h plugin.Handler) {
+	plugin.Register(plugin.NewPlugin(plugin.WithName(name), plugin.WithHandler(h)))
 }
 
 func Init() {
+	setPlugin("Authorization", func(h http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			whiteList := conf.Load("comm", "jwt_white_list").StringList([]string{})
+			for i := range whiteList {
+				match, _ := regexp.MatchString(whiteList[i], r.URL.Path)
+				if match {
+					h.ServeHTTP(w, r)
+					return
+				}
+			}
+			jwtSecret := conf.Load("comm", "jwt_secret").String()
+			raw := r.Header.Get("Authorization")
+			dtk, e := jwt.Decode(jwtSecret, raw)
+			if e != nil {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			r.Header.Set("x-user", dtk.User)
+			h.ServeHTTP(w, r)
+		})
+	})
+	setRegistry("consul", func(opts ...registry.Option) registry.Registry {
+		return cache.New(consul.NewRegistry(opts...))
+	})
 	cmd.Init()
 }

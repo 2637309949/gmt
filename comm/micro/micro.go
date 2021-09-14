@@ -5,12 +5,14 @@ import (
 	"strings"
 
 	"github.com/micro/go-micro/v2"
+	"github.com/micro/go-micro/v2/broker"
 	"github.com/micro/go-micro/v2/client"
 	"github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/cache"
 	"github.com/micro/go-micro/v2/server"
 	"github.com/micro/go-micro/v2/transport/grpc"
+	nats "github.com/micro/go-plugins/broker/nats/v2"
 	"github.com/micro/go-plugins/registry/consul/v2"
 )
 
@@ -62,10 +64,14 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.Version("latest"))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
+	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
 	logger.Infof("registry_address:%v", registryAddress)
 	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) {
 		op.Addrs = []string{registryAddress}
 	}))))
+	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) {
+		op.Addrs = []string{brokerAddress}
+	})))
 	srv := micro.NewService(opts...)
 	defer srv.Init()
 	return srv

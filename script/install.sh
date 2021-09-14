@@ -91,6 +91,14 @@ fi
 
 docker run --rm --env-file=/etc/micro.d/.env micro:2.9.3 list services
 
+# booting nats
+if [ ! "$(docker ps -q -f name=nats)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=nats)" ]; then
+        docker rm nats
+    fi
+    docker run -d -it --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 nats:2.5.0
+fi
+
 # clean tmp
 cd $pwd
 rm -rf $tempdir

@@ -11,7 +11,6 @@ import (
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/reader"
 	"github.com/micro/go-plugins/config/source/consul/v2"
-	"github.com/netdata/go-orchestrator/logger"
 )
 
 var (

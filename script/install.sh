@@ -2,6 +2,8 @@
 pwd=`pwd`
 tempdir=`mktemp -d /tmp/tmpd.XXXXXX`
 
+sudo echo
+
 # install go1.14.11
 cp -rp ~/.gvm/scripts/env/use ~/.gvm/scripts/use
 chmod 775 ~/.gvm/scripts/use

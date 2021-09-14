@@ -23,6 +23,9 @@ git clone --branch v2.9.3 https://hub.fastgit.org/micro/micro.git $tempdir/micro
 git clone https://hub.fastgit.org/2637309949/gmt.git $tempdir/gmt
 cd $tempdir/micro
 cp -rf ../gmt/comm ../gmt/script/.env . 
+# cp -rf $pwd/comm ../gmt/script/.env . 
+
+
 rm comm/go.mod comm/go.sum 
 sed -i "s/comm\//github.com\/micro\/micro\/v2\/comm\//g" `find comm -name "*.go" | xargs grep "comm\/" -rl`
 cat > main.go <<EOF

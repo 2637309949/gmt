@@ -14,7 +14,7 @@ type Claims struct {
 // Decode defined TODO
 func Decode(jwtSecret, raw string) (*Claims, error) {
 	t, err := jwt.ParseWithClaims(raw, &Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return jwtSecret, nil
+		return []byte(jwtSecret), nil
 	})
 	if err != nil {
 		return nil, err
@@ -36,5 +36,5 @@ func Encode(jwtSecret, issuer, user string, expireTime int64) (string, error) {
 		},
 	}
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return jwtToken.SignedString(jwtSecret)
+	return jwtToken.SignedString([]byte(jwtSecret))
 }

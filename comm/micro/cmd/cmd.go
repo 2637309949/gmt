@@ -5,6 +5,7 @@ import (
 	"comm/jwt"
 	"net/http"
 	"regexp"
+	"strings"
 
 	cfg "github.com/micro/go-micro/v2/config/cmd"
 	"github.com/micro/go-micro/v2/registry"
@@ -33,8 +34,10 @@ func Init() {
 					return
 				}
 			}
+
 			jwtSecret := conf.Load("comm", "jwt_secret").String()
 			raw := r.Header.Get("Authorization")
+			raw = strings.ReplaceAll(raw, "Bearer ", "")
 			dtk, e := jwt.Decode(jwtSecret, raw)
 			if e != nil {
 				w.WriteHeader(http.StatusUnauthorized)

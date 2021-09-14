@@ -65,13 +65,14 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
 	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
-	logger.Infof("registry_address:%v", registryAddress)
 	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) {
 		op.Addrs = []string{registryAddress}
 	}))))
 	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) {
 		op.Addrs = []string{brokerAddress}
 	})))
+	logger.Infof("registry_address:%v", registryAddress)
+	logger.Infof("broker_address:%v", brokerAddress)
 	srv := micro.NewService(opts...)
 	defer srv.Init()
 	return srv

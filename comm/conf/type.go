@@ -1,7 +1,7 @@
 package conf
 
 import (
-	"comm/util/reflect"
+	"comm/util/base"
 	"encoding/json"
 )
 
@@ -11,7 +11,7 @@ type typeConfig struct {
 
 // StringList defined TODO
 func (t *typeConfig) StringList(defs ...[]string) (src []string) {
-	if reflect.IsBlank(t.b) && len(defs) > 0 {
+	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}
 	json.Unmarshal(t.b, &src)
@@ -20,7 +20,7 @@ func (t *typeConfig) StringList(defs ...[]string) (src []string) {
 
 // String defined TODO
 func (t *typeConfig) String(defs ...string) (src string) {
-	if reflect.IsBlank(t.b) && len(defs) > 0 {
+	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}
 	json.Unmarshal(t.b, &src)
@@ -29,7 +29,7 @@ func (t *typeConfig) String(defs ...string) (src string) {
 
 // Int defined TODO
 func (t *typeConfig) Int(defs ...int64) (src int64) {
-	if reflect.IsBlank(t.b) && len(defs) > 0 {
+	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}
 	json.Unmarshal(t.b, &src)
@@ -38,7 +38,7 @@ func (t *typeConfig) Int(defs ...int64) (src int64) {
 
 // Bool defined TODO
 func (t *typeConfig) Bool(defs ...bool) (src bool) {
-	if reflect.IsBlank(t.b) && len(defs) > 0 {
+	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}
 	json.Unmarshal(t.b, &src)
@@ -47,7 +47,7 @@ func (t *typeConfig) Bool(defs ...bool) (src bool) {
 
 // Float64 defined TODO
 func (t *typeConfig) Float(defs ...float64) (src float64) {
-	if reflect.IsBlank(t.b) && len(defs) > 0 {
+	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}
 	json.Unmarshal(t.b, &src)

@@ -1,18 +1,11 @@
-package reflect
+package base
 
 import (
 	"bytes"
 	"reflect"
-	"unsafe"
 )
 
-type visit struct {
-	a1  unsafe.Pointer
-	a2  unsafe.Pointer
-	typ reflect.Type
-}
-
-// IsBlank defined
+// IsBlank defined TODO
 func IsBlank(v interface{}) bool {
 	if v == nil {
 		return true
@@ -35,19 +28,22 @@ func IsBlank(v interface{}) bool {
 	return reflect.DeepEqual(value.Interface(), reflect.Zero(value.Type()).Interface())
 }
 
-// OrOne defined TODO
-func OrOne(arr ...interface{}) interface{} {
+// Some defined TODO
+func Some(arr ...interface{}) interface{} {
+	if len(arr) == 0 {
+		return nil
+	}
 	for i := range arr {
-		item := arr[i]
-		if !IsBlank(reflect.ValueOf(item)) {
-			return item
+		s := arr[i]
+		if !IsBlank(s) {
+			return s
 		}
 	}
-	return reflect.Zero(SliceElem(reflect.TypeOf(arr))).Interface()
+	return reflect.Zero(sliceElem(reflect.TypeOf(arr[0]))).Interface()
 }
 
-// SliceElem defined
-func SliceElem(rtype reflect.Type) reflect.Type {
+// sliceElem defined TODO
+func sliceElem(rtype reflect.Type) reflect.Type {
 	for {
 		if rtype.Kind() != reflect.Slice && rtype.Kind() != reflect.Array {
 			return rtype
@@ -57,42 +53,7 @@ func SliceElem(rtype reflect.Type) reflect.Type {
 	}
 }
 
-// RedirectValue defined
-func RedirectValue(value reflect.Value) reflect.Value {
-	for {
-		if !value.IsValid() || (value.Kind() != reflect.Ptr && value.Kind() != reflect.Interface) {
-			return value
-		}
-
-		res := value.Elem()
-
-		// Test for a circular type.
-		if res.Kind() == reflect.Ptr && value.Kind() == reflect.Ptr && value.Pointer() == res.Pointer() {
-			return value
-		}
-
-		if !res.IsValid() && value.Kind() == reflect.Ptr {
-			return reflect.Zero(value.Type().Elem())
-		}
-
-		value = res
-	}
-}
-
-// IsFunction returns if the argument is a function.
-func IsFunction(in interface{}, num ...int) bool {
-	funcType := reflect.TypeOf(in)
-	result := funcType != nil && funcType.Kind() == reflect.Func
-	if len(num) >= 1 {
-		result = result && funcType.NumIn() == num[0]
-	}
-	if len(num) == 2 {
-		result = result && funcType.NumOut() == num[1]
-	}
-	return result
-}
-
-// IsEqual returns if the two objects are equal
+// IsEqual defined TODO
 func IsEqual(expected interface{}, actual interface{}) bool {
 	if expected == nil || actual == nil {
 		return expected == actual
@@ -110,17 +71,17 @@ func IsEqual(expected interface{}, actual interface{}) bool {
 	return reflect.DeepEqual(expected, actual)
 }
 
-// IsType returns if the two objects are in the same type
+// IsType defined TODO
 func IsType(expected interface{}, actual interface{}) bool {
 	return IsEqual(reflect.TypeOf(expected), reflect.TypeOf(actual))
 }
 
-// Equal returns if the two objects are equal
+// Equal defined TODO
 func Equal(expected interface{}, actual interface{}) bool {
 	return IsEqual(expected, actual)
 }
 
-// NotEqual returns if the two objects are not equal
+// NotEqual defined TODO
 func NotEqual(expected interface{}, actual interface{}) bool {
 	return !IsEqual(expected, actual)
 }

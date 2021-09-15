@@ -1,4 +1,4 @@
-package reflect
+package deep
 
 import (
 	"database/sql"

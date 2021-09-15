@@ -2,7 +2,7 @@ package conf
 
 import (
 	"comm/logger"
-	"comm/util"
+	"comm/util/base"
 	"encoding/json"
 	"flag"
 	"os"
@@ -32,11 +32,11 @@ func init() {
 	address := flag.String("consul", "", "consul address")
 	flag.Parse()
 
-	*address = util.Some(*address, os.Getenv("consul")).(string)
+	*address = base.Some(*address, os.Getenv("consul")).(string)
 	if registry := os.Getenv("MICRO_REGISTRY"); registry == "consul" {
-		*address = util.Some(*address, os.Getenv("MICRO_REGISTRY_ADDRESS")).(string)
+		*address = base.Some(*address, os.Getenv("MICRO_REGISTRY_ADDRESS")).(string)
 	}
-	*address = util.Some(*address, "127.0.0.1:8500").(string)
+	*address = base.Some(*address, "127.0.0.1:8500").(string)
 
 	logger.Infof("configuration center address %v", *address)
 	source := consul.NewSource(

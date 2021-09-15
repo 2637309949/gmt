@@ -6,7 +6,7 @@ import (
 	"comm/db/mysql"
 	"comm/logger"
 	"comm/timer"
-	"comm/util/reflect"
+	"comm/util/deep"
 	"helloworld/srv/types"
 	"proto/helloworld"
 )
@@ -18,24 +18,24 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *
 	defer marker.Init("ArticleAdd")
 
 	marker.Mark("data_source")
-	db, err := mysql.InitDb("data_source")
+	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy req")
 	data := types.Article{}
-	err = reflect.Copy(&data, req)
+	err = deep.Copy(&data, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleAddDb")
-	err = h.ArticleAddDb(ctx, db, &data)
+	marker.Mark("ArticleAddDB")
+	err = h.ArticleAddDB(ctx, db, &data)
 	if err != nil {
-		logger.Errorf("ArticleAddDb %v", err)
+		logger.Errorf("ArticleAddDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID.Int64
@@ -49,24 +49,24 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleFilter,
 	defer marker.Init("ArticleDel")
 
 	marker.Mark("data_source")
-	db, err := mysql.InitDb("data_source")
+	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy req")
 	filter := types.Article{}
-	err = reflect.Copy(&filter, req)
+	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleDelDb")
-	err = h.ArticleDelDb(ctx, db, &filter)
+	marker.Mark("ArticleDelDB")
+	err = h.ArticleDelDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleDelDb %v", err)
+		logger.Errorf("ArticleDelDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID.Int64
@@ -80,24 +80,24 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.Article, rs
 	defer marker.Init("ArticleUpdate")
 
 	marker.Mark("data_source")
-	db, err := mysql.InitDb("data_source")
+	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy req")
 	filter := types.Article{}
-	err = reflect.Copy(&filter, req)
+	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleUpdateDb")
-	err = h.ArticleUpdateDb(ctx, db, &filter)
+	marker.Mark("ArticleUpdateDB")
+	err = h.ArticleUpdateDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleUpdateDb %v", err)
+		logger.Errorf("ArticleUpdateDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID.Int64
@@ -111,24 +111,24 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleFilter,
 	defer marker.Init("ArticleOne")
 
 	marker.Mark("data_source")
-	db, err := mysql.InitDb("data_source")
+	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy req")
 	filter, data := types.Article{}, types.Article{}
-	err = reflect.Copy(&filter, req)
+	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleOneDb")
-	err = h.ArticleOneDb(ctx, db, &filter, &data)
+	marker.Mark("ArticleOneDB")
+	err = h.ArticleOneDB(ctx, db, &filter, &data)
 	if err != nil {
-		logger.Errorf("ArticleOneDb %v", err)
+		logger.Errorf("ArticleOneDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID.Int64
@@ -142,31 +142,31 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticleFilter
 	defer marker.Init("ArticlePage")
 
 	marker.Mark("data_source")
-	db, err := mysql.InitDb("data_source")
+	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy req")
 	filter, list := types.Article{}, []types.Article{}
-	err = reflect.Copy(&filter, req)
+	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticlePageDb")
+	marker.Mark("ArticlePageDB")
 	var totalRecord int64
 	var totalPage int64
-	err = h.ArticlePageDb(ctx, db, &filter, &list, &totalRecord)
+	err = h.ArticlePageDB(ctx, db, &filter, &list, &totalRecord)
 	if err != nil {
-		logger.Errorf("InitDb %v", err)
+		logger.Errorf("InitDB %v", err)
 		return err
 	}
 
 	marker.Mark("Copy rsp")
-	err = reflect.Copy(&rsp.Data, &list)
+	err = deep.Copy(&rsp.Data, &list)
 	if totalRecord < req.Size {
 		totalPage = 1
 	} else if totalRecord%req.Size == 0 {

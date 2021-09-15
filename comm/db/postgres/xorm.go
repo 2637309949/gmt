@@ -12,8 +12,8 @@ import (
 
 var dbmap map[string]*xorm.Engine
 
-// InitDb defined TODO
-func InitDb(key string) (*xorm.Engine, error) {
+// InitDB defined TODO
+func InitDB(key string) (*xorm.Engine, error) {
 	dbUri := micro.Key(key).String()
 	if dbUri == "" {
 		return nil, errors.New("not found uri")

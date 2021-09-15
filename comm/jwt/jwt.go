@@ -6,11 +6,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-type Claims struct {
-	User string `json:"user"`
-	jwt.StandardClaims
-}
-
 // Decode defined TODO
 func Decode(jwtSecret, raw string) (*Claims, error) {
 	t, err := jwt.ParseWithClaims(raw, &Claims{}, func(token *jwt.Token) (interface{}, error) {

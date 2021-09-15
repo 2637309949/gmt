@@ -2,6 +2,7 @@ package micro
 
 import (
 	"comm/conf"
+	"fmt"
 	"strings"
 
 	"github.com/micro/go-micro/v2"
@@ -16,32 +17,36 @@ import (
 	"github.com/micro/go-plugins/registry/consul/v2"
 )
 
+var DefaultServiceNamePrefix = "go.micro."
 var name string
 
-// GetName defined TODO
-func GetName() string {
+// GetServiceName defined TODO
+func GetServiceName() string {
 	return name
 }
 
-// SetName defined TODO
-func SetName(n string) {
+// SetServiceName defined TODO
+func SetServiceName(n string) {
+	if name != "" {
+		return
+	}
 	name = n
 }
 
 // Key defined TODO
 func Key(key string) conf.Config {
-	return conf.Load(GetName(), key)
+	return conf.Load(GetServiceName(), key)
 }
 
 // Name of the service
 func Name(name string) micro.Option {
-	SetName(strings.ReplaceAll(name, NameFormat(""), ""))
+	SetServiceName(strings.ReplaceAll(name, NameFormat(""), ""))
 	return micro.Name(name)
 }
 
 // NameFormat defined TODO
 func NameFormat(n string) string {
-	return "go.micro." + n
+	return fmt.Sprintf("%v%v", DefaultServiceNamePrefix, n)
 }
 
 // Version of the service
@@ -61,18 +66,16 @@ func NewServiceWithName(name string) micro.Service {
 
 // NewService creates and returns a new Service based on the packages within.
 func NewService(opts ...micro.Option) micro.Service {
-	opts = append(opts, micro.Version("latest"))
-	opts = append(opts, micro.Transport(grpc.NewTransport()))
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
 	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
-	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) {
-		op.Addrs = []string{registryAddress}
-	}))))
-	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) {
-		op.Addrs = []string{brokerAddress}
-	})))
+
 	logger.Infof("registry_address:%v", registryAddress)
 	logger.Infof("broker_address:%v", brokerAddress)
+
+	opts = append(opts, micro.Version("latest"))
+	opts = append(opts, micro.Transport(grpc.NewTransport()))
+	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
+	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) { op.Addrs = []string{brokerAddress} })))
 	srv := micro.NewService(opts...)
 	defer srv.Init()
 	return srv
@@ -90,5 +93,5 @@ func RegisterHandler(s server.Server, h interface{}, opts ...server.HandlerOptio
 
 // RegisterSubscriber is syntactic sugar for registering a subscriber
 func RegisterSubscriber(topic string, s server.Server, h interface{}, opts ...server.SubscriberOption) error {
-	return micro.RegisterSubscriber(NameFormat(topic), s, h, opts...)
+	return micro.RegisterSubscriber(topic, s, h, opts...)
 }

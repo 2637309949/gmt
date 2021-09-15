@@ -5,6 +5,7 @@ import (
 	"comm/micro"
 	"errors"
 	"time"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/xorm"
 	"github.com/xormplus/xorm/log"
@@ -12,12 +13,12 @@ import (
 
 var dbmap map[string]*xorm.Engine
 
-func init()  {
+func init() {
 	dbmap = map[string]*xorm.Engine{}
 }
 
-// InitDb defined TODO
-func InitDb(key string) (*xorm.Engine, error) {
+// InitDB defined TODO
+func InitDB(key string) (*xorm.Engine, error) {
 	dbUri := micro.Key(key).String()
 	if dbUri == "" {
 		return nil, errors.New("not found uri")

@@ -3,8 +3,11 @@ package micro
 import (
 	"comm/conf"
 	"fmt"
+	"io"
 	"strings"
+	"time"
 
+	"github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/broker"
 	"github.com/micro/go-micro/v2/client"
@@ -15,6 +18,11 @@ import (
 	"github.com/micro/go-micro/v2/transport/grpc"
 	nats "github.com/micro/go-plugins/broker/nats/v2"
 	"github.com/micro/go-plugins/registry/consul/v2"
+	breakerHystrix "github.com/micro/go-plugins/wrapper/breaker/hystrix/v2"
+	traceOpentracing "github.com/micro/go-plugins/wrapper/trace/opentracing/v2"
+	"github.com/opentracing/opentracing-go"
+	"github.com/uber/jaeger-client-go"
+	jaegercfg "github.com/uber/jaeger-client-go/config"
 )
 
 var DefaultServiceNamePrefix = "go.micro."
@@ -64,18 +72,55 @@ func NewServiceWithName(name string) micro.Service {
 	return NewService(Name(name))
 }
 
+func NewJaegerTracer(serviceName string, addr string) (opentracing.Tracer, io.Closer, error) {
+	cfg := jaegercfg.Configuration{
+		ServiceName: serviceName,
+		Sampler: &jaegercfg.SamplerConfig{
+			Type:  jaeger.SamplerTypeConst,
+			Param: 1,
+		},
+		Reporter: &jaegercfg.ReporterConfig{
+			LogSpans:            true,
+			BufferFlushInterval: 1 * time.Second,
+		},
+	}
+
+	sender, err := jaeger.NewUDPTransport(addr, 0)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	reporter := jaeger.NewRemoteReporter(sender)
+	tracer, closer, err := cfg.NewTracer(
+		jaegercfg.Reporter(reporter),
+	)
+
+	return tracer, closer, err
+}
+
 // NewService creates and returns a new Service based on the packages within.
 func NewService(opts ...micro.Option) micro.Service {
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
 	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
+	opentracingAddress := conf.Load("comm", "opentracing_address").String("127.0.0.1:6831")
+	jaegerTracer, _, _ := NewJaegerTracer(NameFormat(GetServiceName()), opentracingAddress)
+	hystrix.DefaultSleepWindow = 200
+	hystrix.DefaultMaxConcurrent = 3
 
 	logger.Infof("registry_address:%v", registryAddress)
 	logger.Infof("broker_address:%v", brokerAddress)
+	logger.Infof("opentracing_address:%v", opentracingAddress)
 
 	opts = append(opts, micro.Version("latest"))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
 	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) { op.Addrs = []string{brokerAddress} })))
+	opts = append(opts, micro.WrapHandler(traceOpentracing.NewHandlerWrapper(jaegerTracer)))
+	opts = append(opts, micro.WrapClient(traceOpentracing.NewClientWrapper(jaegerTracer)))
+	opts = append(opts, micro.WrapClient(breakerHystrix.NewClientWrapper()))
+	opts = append(opts, micro.WrapSubscriber(traceOpentracing.NewSubscriberWrapper(jaegerTracer)))
+	opts = append(opts, micro.Transport(grpc.NewTransport()))
+
 	srv := micro.NewService(opts...)
 	defer srv.Init()
 	return srv

@@ -44,6 +44,19 @@ if [ ! "$(docker ps -q -f name=consul)" ]; then
     -v /data/consul:/data/consul consul:1.8.5 \
     agent -server -ui -config-dir /etc/consul.d/ -data-dir=/data/consul -log-file=/data/consul/log
 fi
+curl 'http://127.0.0.1:8500/v1/kv/micro/config/comm?dc=dc&flags=0' \
+  -X 'PUT' \
+  -H 'Connection: keep-alive' \
+  -H 'sec-ch-ua: "Google Chrome";v="93", " Not;A Brand";v="99", "Chromium";v="93"' \
+  -H 'Content-Type: application/json; charset=UTF-8' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'Accept: */*' \
+  -H 'Origin: http://127.0.0.1:8500' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7' \
+  -H 'Cookie: io=r1hlEUjS4Ox4XtGTAACZ' \
+  -H 'token: DTFDUAGFPTWWXQOIDQSMUA' \
+  --data-raw $'{\n    "jwt_white_list": ["/helloworld/handler11"],\n    "jwt_secret": "7y3h237ye2o38sdasd9asduahsda8sdaushd9-a9s9idasdhd",\n    "registry_address":"172.30.13.77:8500",\n    "broker":"nats",\n    "broker_address":"172.30.12.14:4222",\n    "opentracing_address":"127.0.0.1:6831",\n  \u0009"redis_address":"127.0.0.1:6379",\n    "redis_passwd":"gmt692#112"\n}' \
+  --compressed
 ```
 
 ### Install api gateway
@@ -115,8 +128,35 @@ if [ ! "$(docker ps -q -f name=nats)" ]; then
 fi
 ```
 
+### Install jaeger
+```shell
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14268:14268 \
+  -p 14250:14250 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:1.20
+```
+
 ### Run helloworld
 ```shell
+curl 'http://127.0.0.1:8500/v1/kv/micro/config/srv/helloworld?dc=dc&flags=0' \
+  -X 'PUT' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json; charset=UTF-8' \
+  -H 'X-Requested-With: XMLHttpRequest' \
+  -H 'Accept: */*' \
+  -H 'Origin: http://127.0.0.1:8500' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7' \
+  -H 'Cookie: io=r1hlEUjS4Ox4XtGTAACZ' \
+  -H 'token: DTFDUAGFPTWWXQOIDQSMUA' \
+  --data-raw $'{\n"data_source": "root:111111@/dolphin_localhost?charset=utf8&parseTime=True&loc=Local&"\n}' \
+  --compressed
 git clone https://hub.fastgit.org/2637309949/gmt.git my-micro-collect
 cd my-micro-collect/helloworld-service
 go run srv/main.go &

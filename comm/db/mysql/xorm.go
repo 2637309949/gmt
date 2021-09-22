@@ -23,6 +23,7 @@ func InitDB(key string) (*xorm.Engine, error) {
 	if dbUri == "" {
 		return nil, errors.New("not found uri")
 	}
+
 	if dbmap[dbUri] != nil {
 		return dbmap[dbUri], nil
 	}

@@ -5,9 +5,16 @@ import (
 	"os"
 
 	"github.com/micro/go-micro/v2/logger"
+	lgs "github.com/micro/go-plugins/logger/logrus/v2"
+	"github.com/sirupsen/logrus"
 )
 
-var l logger.Logger = logger.NewHelper(logger.NewLogger())
+var l logger.Logger
+
+func init() {
+	logrusLogger := logrus.New()
+	l = logger.NewHelper(logger.NewLogger(lgs.WithLogger(logrusLogger)))
+}
 
 func Out() io.Writer {
 	return l.Options().Out

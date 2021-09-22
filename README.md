@@ -39,7 +39,10 @@ if [ ! "$(docker ps -q -f name=consul)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=consul)" ]; then
         docker rm consul
     fi
-	docker run --name=consul -d -p 8500:8500 -v /etc/consul.d/:/etc/consul.d/ -v /data/consul:/data/consul consul:1.8.5 agent -server -ui -config-dir /etc/consul.d/ -data-dir=/data/consul -log-file=/data/consul/log
+	docker run --name=consul -d -p 8500:8500 \
+    -v /etc/consul.d/:/etc/consul.d/ \
+    -v /data/consul:/data/consul consul:1.8.5 \
+    agent -server -ui -config-dir /etc/consul.d/ -data-dir=/data/consul -log-file=/data/consul/log
 fi
 ```
 
@@ -51,7 +54,6 @@ git clone --branch v2.9.3 https://hub.fastgit.org/micro/micro.git $tempdir/micro
 git clone https://hub.fastgit.org/2637309949/gmt.git $tempdir/gmt
 cd $tempdir/micro
 cp -rf ../gmt/comm . 
-
 rm comm/go.mod comm/go.sum 
 sed -i "s/comm\//github.com\/micro\/micro\/v2\/comm\//g" `find comm -name "*.go" | xargs grep "comm\/" -rl`
 cat > main.go <<EOF

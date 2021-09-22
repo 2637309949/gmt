@@ -117,13 +117,17 @@ fi
 
 ### Run helloworld
 ```shell
-git clone https://hub.fastgit.org/2637309949/gmt.git my-micro-collect && cd my-micro-collect/helloworld-service/
+git clone https://hub.fastgit.org/2637309949/gmt.git my-micro-collect
+cd my-micro-collect/helloworld-service
 go run srv/main.go &
 go run api/main.go
 ```
 
 ### Request from API gateway
 ```shell
-curl http://127.0.0.1:8080/helloworld/handler/articleAdd  --header \
-"Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTYwMSIsImV4cCI6MTYzNDIwMjMzNiwiaWF0IjoxNjMxNjEwMzM2LCJpc3MiOiJiYWlkdS5jb20ifQ.1QrmhtcsDhVQ39BQGlOSH7Ckxt2hkHYK9943iquf7BA"
+curl http://127.0.0.1:8080/helloworld/handler/articleAdd  \
+--header "Authorization:Bearer \
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiMTYwMSI\
+sImV4cCI6MTYzNDIwMjMzNiwiaWF0IjoxNjMxNjEwMzM2LCJpc3MiOiJ\
+iYWlkdS5jb20ifQ.1QrmhtcsDhVQ39BQGlOSH7Ckxt2hkHYK9943iquf7BA"
 ```

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"time"
 
 	"comm/db/mysql"
 	"comm/logger"
@@ -9,6 +10,8 @@ import (
 	"comm/util/deep"
 	"helloworld/srv/types"
 	"proto/helloworld"
+
+	"github.com/guregu/null"
 )
 
 func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
@@ -33,6 +36,8 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *
 	}
 
 	marker.Mark("ArticleAddDB")
+
+	data.CreateTime = null.TimeFrom(time.Now())
 	err = h.ArticleAddDB(ctx, db, &data)
 	if err != nil {
 		logger.Errorf("ArticleAddDB %v", err)

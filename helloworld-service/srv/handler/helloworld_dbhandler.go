@@ -6,13 +6,15 @@ import (
 	"helloworld/srv/types"
 	"time"
 
-	"github.com/guregu/null"
 	"github.com/xormplus/xorm"
+
+	"github.com/guregu/null"
 )
 
 func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, data *types.Article) error {
 	logger.Info("Received ArticleAddDB request")
 
+	data.CreateTime = null.TimeFrom(time.Now())
 	ret, err := db.Insert(data)
 	if err != nil {
 		return err

@@ -36,8 +36,8 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *
 	}
 
 	marker.Mark("ArticleAddDB")
-
 	data.CreateTime = null.TimeFrom(time.Now())
+	data.UpdateTime = null.TimeFrom(time.Now())
 	err = h.ArticleAddDB(ctx, db, &data)
 	if err != nil {
 		logger.Errorf("ArticleAddDB %v", err)

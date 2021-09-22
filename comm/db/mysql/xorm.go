@@ -32,6 +32,10 @@ func InitDB(key string) (*xorm.Engine, error) {
 	if err != nil {
 		return nil, err
 	}
+	err = db.Ping()
+	if err != nil {
+		return nil, err
+	}
 
 	logger := log.NewSimpleLogger(logger.Out())
 	logger.ShowSQL(true)

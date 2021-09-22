@@ -12,12 +12,17 @@ import (
 
 var dbmap map[string]*xorm.Engine
 
+func init() {
+	dbmap = map[string]*xorm.Engine{}
+}
+
 // InitDB defined TODO
 func InitDB(key string) (*xorm.Engine, error) {
 	dbUri := micro.Key(key).String()
 	if dbUri == "" {
 		return nil, errors.New("not found uri")
 	}
+
 	if dbmap[dbUri] != nil {
 		return dbmap[dbUri], nil
 	}
@@ -29,6 +34,7 @@ func InitDB(key string) (*xorm.Engine, error) {
 	logger := log.NewSimpleLogger(logger.Out())
 	logger.ShowSQL(true)
 
+	db.SetLogger(logger)
 	db.SetConnMaxLifetime(time.Duration(10) * time.Minute)
 	db.SetMaxIdleConns(15)
 	db.SetMaxOpenConns(50)

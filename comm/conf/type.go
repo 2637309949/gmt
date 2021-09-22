@@ -27,6 +27,15 @@ func (t *typeConfig) String(defs ...string) (src string) {
 	return src
 }
 
+// IntList defined TODO
+func (t *typeConfig) IntList(defs ...[]int) (src []int) {
+	if base.IsBlank(t.b) && len(defs) > 0 {
+		return defs[0]
+	}
+	json.Unmarshal(t.b, &src)
+	return src
+}
+
 // Int defined TODO
 func (t *typeConfig) Int(defs ...int64) (src int64) {
 	if base.IsBlank(t.b) && len(defs) > 0 {
@@ -36,8 +45,26 @@ func (t *typeConfig) Int(defs ...int64) (src int64) {
 	return src
 }
 
+// BoolList defined TODO
+func (t *typeConfig) BoolList(defs ...[]bool) (src []bool) {
+	if base.IsBlank(t.b) && len(defs) > 0 {
+		return defs[0]
+	}
+	json.Unmarshal(t.b, &src)
+	return src
+}
+
 // Bool defined TODO
 func (t *typeConfig) Bool(defs ...bool) (src bool) {
+	if base.IsBlank(t.b) && len(defs) > 0 {
+		return defs[0]
+	}
+	json.Unmarshal(t.b, &src)
+	return src
+}
+
+// FloatList defined TODO
+func (t *typeConfig) FloatList(defs ...[]float64) (src []float64) {
 	if base.IsBlank(t.b) && len(defs) > 0 {
 		return defs[0]
 	}

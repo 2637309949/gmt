@@ -47,9 +47,7 @@ fi
 curl 'http://127.0.0.1:8500/v1/kv/micro/config/comm?dc=dc&flags=0' \
   -X 'PUT' \
   -H 'Connection: keep-alive' \
-  -H 'sec-ch-ua: "Google Chrome";v="93", " Not;A Brand";v="99", "Chromium";v="93"' \
   -H 'Content-Type: application/json; charset=UTF-8' \
-  -H 'X-Requested-With: XMLHttpRequest' \
   -H 'Accept: */*' \
   -H 'Origin: http://127.0.0.1:8500' \
   -H 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7' \
@@ -149,7 +147,6 @@ curl 'http://127.0.0.1:8500/v1/kv/micro/config/srv/helloworld?dc=dc&flags=0' \
   -X 'PUT' \
   -H 'Connection: keep-alive' \
   -H 'Content-Type: application/json; charset=UTF-8' \
-  -H 'X-Requested-With: XMLHttpRequest' \
   -H 'Accept: */*' \
   -H 'Origin: http://127.0.0.1:8500' \
   -H 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7' \

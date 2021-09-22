@@ -16,7 +16,7 @@ import (
 	"github.com/micro/go-micro/v2/registry/cache"
 	"github.com/micro/go-micro/v2/server"
 	"github.com/micro/go-micro/v2/transport/grpc"
-	nats "github.com/micro/go-plugins/broker/nats/v2"
+	brokerNats "github.com/micro/go-plugins/broker/nats/v2"
 	"github.com/micro/go-plugins/registry/consul/v2"
 	breakerHystrix "github.com/micro/go-plugins/wrapper/breaker/hystrix/v2"
 	traceOpentracing "github.com/micro/go-plugins/wrapper/trace/opentracing/v2"
@@ -55,16 +55,6 @@ func Name(name string) micro.Option {
 // NameFormat defined TODO
 func NameFormat(n string) string {
 	return fmt.Sprintf("%v%v", DefaultServiceNamePrefix, n)
-}
-
-// Version of the service
-func Version(v string) micro.Option {
-	return micro.Version(v)
-}
-
-// Metadata associated with the service
-func Metadata(md map[string]string) micro.Option {
-	return micro.Metadata(md)
 }
 
 // NewServiceWithName defined TODO
@@ -114,7 +104,7 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.Version("latest"))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 	opts = append(opts, micro.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
-	opts = append(opts, micro.Broker(nats.NewBroker(func(op *broker.Options) { op.Addrs = []string{brokerAddress} })))
+	opts = append(opts, micro.Broker(brokerNats.NewBroker(func(op *broker.Options) { op.Addrs = []string{brokerAddress} })))
 	opts = append(opts, micro.WrapHandler(traceOpentracing.NewHandlerWrapper(jaegerTracer)))
 	opts = append(opts, micro.WrapClient(traceOpentracing.NewClientWrapper(jaegerTracer)))
 	opts = append(opts, micro.WrapClient(breakerHystrix.NewClientWrapper()))

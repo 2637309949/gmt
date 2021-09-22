@@ -52,6 +52,16 @@ func init() {
 	conf.Load(source)
 }
 
+// Set defined TODO
+func Set(val interface{}, path ...string) {
+	conf.Set(val, path...)
+}
+
+// Del defined TODO
+func Del(path ...string) {
+	conf.Del(path...)
+}
+
 // Get defined TODO
 func Get(key ...string) reader.Value {
 	k := strings.Join(key, ".")

@@ -25,8 +25,9 @@ go get github.com/micro/micro/v2/cmd/protoc-gen-micro
 pwd=`pwd`
 tempdir=`mktemp -d /tmp/tmpd.XXXXXX`
 fastgit=https://github.91chifun.workers.dev/https://github.com
-wget -P $tempdir/protoc $fastgit/protocolbuffers/protobuf/releases/download/v3.10.0/protoc-3.10.0-linux-x86_64.zip 
-unzip $tempdir/protoc/protoc-3.10.0-linux-x86_64.zip -d $tempdir/protoc/protoc-3.10.0-linux-x86_64
+version=protoc-3.10.0-linux-x86_64
+wget -P $tempdir/protoc $fastgit/protocolbuffers/protobuf/releases/download/v3.10.0/$version.zip 
+unzip $tempdir/protoc/protoc-3.10.0-linux-x86_64.zip -d $tempdir/protoc/$version
 cp $tempdir/protoc/protoc-3.10.0-linux-x86_64/bin/protoc $GOPATH/bin 
 ```
 

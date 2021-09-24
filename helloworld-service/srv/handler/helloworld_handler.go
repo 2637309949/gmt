@@ -10,8 +10,6 @@ import (
 	"comm/util/deep"
 	"helloworld/srv/types"
 	"proto/helloworld"
-
-	"github.com/guregu/null"
 )
 
 func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
@@ -36,14 +34,14 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *
 	}
 
 	marker.Mark("ArticleAddDB")
-	data.CreateTime = null.TimeFrom(time.Now())
-	data.UpdateTime = null.TimeFrom(time.Now())
+	data.CreateTime = time.Now()
+	data.UpdateTime = time.Now()
 	err = h.ArticleAddDB(ctx, db, &data)
 	if err != nil {
 		logger.Errorf("ArticleAddDB %v", err)
 		return err
 	}
-	rsp.Id = data.ID.Int64
+	rsp.Id = data.ID
 	return nil
 }
 
@@ -74,7 +72,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleFilter,
 		logger.Errorf("ArticleDelDB %v", err)
 		return err
 	}
-	rsp.Id = filter.ID.Int64
+	rsp.Id = filter.ID
 	return nil
 }
 
@@ -105,7 +103,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.Article, rs
 		logger.Errorf("ArticleUpdateDB %v", err)
 		return err
 	}
-	rsp.Id = filter.ID.Int64
+	rsp.Id = filter.ID
 	return nil
 }
 
@@ -136,7 +134,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleFilter,
 		logger.Errorf("ArticleOneDB %v", err)
 		return err
 	}
-	rsp.Id = data.ID.Int64
+	rsp.Id = data.ID
 	return nil
 }
 

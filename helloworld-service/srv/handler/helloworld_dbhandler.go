@@ -7,44 +7,42 @@ import (
 	"time"
 
 	"github.com/xormplus/xorm"
-
-	"github.com/guregu/null"
 )
 
 func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, data *types.Article) error {
 	logger.Info("Received ArticleAddDB request")
 
-	data.CreateTime = null.TimeFrom(time.Now())
+	data.CreateTime = time.Now()
 	ret, err := db.Insert(data)
 	if err != nil {
 		return err
 	}
-	data.ID.Int64 = ret
+	data.ID = ret
 	return err
 }
 
 func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, filter *types.Article) error {
 	logger.Info("Received ArticleDelDB request")
 
-	ret, err := db.ID(filter.ID.Int64).Update(&types.Article{
-		UpdateTime: null.TimeFrom(time.Now()),
-		IsDelete:   null.IntFrom(1),
+	ret, err := db.ID(filter.ID).Update(&types.Article{
+		UpdateTime: time.Now(),
+		IsDelete:   1,
 	})
 	if err != nil {
 		return err
 	}
-	filter.ID.Int64 = ret
+	filter.ID = ret
 	return err
 }
 
 func (h *Handler) ArticleUpdateDB(ctx context.Context, db *xorm.Engine, data *types.Article) error {
 	logger.Info("Received ArticleUpdateDB request")
 
-	ret, err := db.ID(data.ID.Int64).Update(data)
+	ret, err := db.ID(data.ID).Update(data)
 	if err != nil {
 		return err
 	}
-	data.ID.Int64 = ret
+	data.ID = ret
 	return err
 }
 

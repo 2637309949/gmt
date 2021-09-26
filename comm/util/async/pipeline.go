@@ -107,13 +107,13 @@ func (p *PipeLine) isFinished() bool {
 }
 
 func (p *PipeLine) Finish() {
-	p.fsm.actEvent(shutdown)
-	close(p.pipe)
+	p.done()
 }
 
 func (p *PipeLine) done() {
 	if !p.isFinished() {
-		p.Finish()
+		p.fsm.actEvent(shutdown)
+		close(p.pipe)
 	}
 }
 

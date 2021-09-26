@@ -29,18 +29,18 @@ type Config interface {
 
 func init() {
 	gtv = map[string]reader.Value{}
-	address := flag.String("consul", "", "consul address")
+	address := *flag.String("consul", "", "consul address")
 	flag.Parse()
 
-	*address = base.Some(*address, os.Getenv("consul")).(string)
+	address = base.Some(address, os.Getenv("consul")).(string)
 	if registry := os.Getenv("MICRO_REGISTRY"); registry == "consul" {
-		*address = base.Some(*address, os.Getenv("MICRO_REGISTRY_ADDRESS")).(string)
+		address = base.Some(address, os.Getenv("MICRO_REGISTRY_ADDRESS")).(string)
 	}
-	*address = base.Some(*address, "127.0.0.1:8500").(string)
+	address = base.Some(address, "127.0.0.1:8500").(string)
 
-	logger.Infof("configuration center address %v", *address)
+	logger.Infof("configuration center address %v", address)
 	source := consul.NewSource(
-		consul.WithAddress(*address),
+		consul.WithAddress(address),
 		consul.WithPrefix("/micro/config"),
 		consul.StripPrefix(true),
 	)

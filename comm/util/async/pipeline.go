@@ -10,19 +10,21 @@ type runner int
 
 // PipeLine defined TODO
 type PipeLine struct {
-	state  int32
-	runner chan runner
+	fsm    *simpleFSM
 	ctx    context.Context
 	cancel context.CancelFunc
+	runner chan runner
 	pipe   chan interface{}
 }
 
 func NewPipeLine(ctx context.Context, worker int) *PipeLine {
 	x, c := context.WithCancel(ctx)
-	line := PipeLine{state: 100, pipe: make(chan interface{}, 1)}
+	line := PipeLine{pipe: make(chan interface{}, 1)}
 	line.ctx = x
 	line.runner = make(chan runner, worker)
 	line.cancel = c
+	line.fsm = newSimpleFSM()
+	line.fsm.actEvent(running)
 	return &line
 }
 
@@ -101,17 +103,16 @@ func (p *PipeLine) dispatch(funk reflect.Value, v reflect.Value) {
 }
 
 func (p *PipeLine) isFinished() bool {
-	return p.state == 101
+	return p.fsm.Current() >= shutdown
 }
 
 func (p *PipeLine) Finish() {
-	p.state = 101
+	p.fsm.actEvent(shutdown)
+	close(p.pipe)
 }
 
 func (p *PipeLine) done() {
 	if !p.isFinished() {
-		close(p.runner)
-		close(p.pipe)
 		p.Finish()
 	}
 }
@@ -131,4 +132,6 @@ func (p *PipeLine) Wait() error {
 			return p.ctx.Err()
 		}
 	}
+	close(p.runner)
+	return nil
 }

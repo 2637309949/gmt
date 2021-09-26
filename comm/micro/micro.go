@@ -19,6 +19,7 @@ import (
 	brokerNats "github.com/micro/go-plugins/broker/nats/v2"
 	"github.com/micro/go-plugins/registry/consul/v2"
 	breakerHystrix "github.com/micro/go-plugins/wrapper/breaker/hystrix/v2"
+	monitoringPrometheus "github.com/micro/go-plugins/wrapper/monitoring/prometheus/v2"
 	traceOpentracing "github.com/micro/go-plugins/wrapper/trace/opentracing/v2"
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"
@@ -107,8 +108,9 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.Broker(brokerNats.NewBroker(func(op *broker.Options) { op.Addrs = []string{brokerAddress} })))
 	opts = append(opts, micro.WrapHandler(traceOpentracing.NewHandlerWrapper(jaegerTracer)))
 	opts = append(opts, micro.WrapClient(traceOpentracing.NewClientWrapper(jaegerTracer)))
-	opts = append(opts, micro.WrapClient(breakerHystrix.NewClientWrapper()))
 	opts = append(opts, micro.WrapSubscriber(traceOpentracing.NewSubscriberWrapper(jaegerTracer)))
+	opts = append(opts, micro.WrapClient(breakerHystrix.NewClientWrapper()))
+	opts = append(opts, micro.WrapHandler(monitoringPrometheus.NewHandlerWrapper()))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 
 	srv := micro.NewService(opts...)

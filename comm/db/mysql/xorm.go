@@ -6,10 +6,9 @@ import (
 	"errors"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/xorm"
 	"github.com/xormplus/xorm/log"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 var dbmap map[string]*xorm.Engine

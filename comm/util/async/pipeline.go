@@ -1,20 +1,3 @@
-// func main() {
-// 	cwt, cancel := context.WithTimeout(context.Background(), 100*time.Second)
-// 	defer cancel()
-// 	pipeline := async.NewPipeLine(cwt, 10)
-// 	pipeline.Consumer(func(v int) {
-// 		fmt.Println("------------", v)
-// 		time.Sleep(1 * time.Second)
-// 	})
-// 	init := int(0)
-// 	pipeline.ProductUntil(func(it *int) ([]int, bool) {
-// 		*it = *it + 1
-// 		return []int{*it}, *it == 100
-// 	}, &init)
-// 	err := pipeline.Wait()
-// 	fmt.Println("------------err", err)
-// }
-
 package async
 
 import (

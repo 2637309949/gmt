@@ -33,8 +33,9 @@ func init() {
 	flag.Parse()
 
 	*address = base.Some(*address, os.Getenv("consul")).(string)
-	if registry := os.Getenv("MICRO_REGISTRY"); registry == "consul" {
-		*address = base.Some(*address, os.Getenv("MICRO_REGISTRY_ADDRESS")).(string)
+	registry, registry_address := os.Getenv("MICRO_REGISTRY"), os.Getenv("MICRO_REGISTRY_ADDRESS")
+	if registry == "consul" {
+		*address = base.Some(*address, registry_address).(string)
 	}
 	*address = base.Some(*address, "127.0.0.1:8500").(string)
 

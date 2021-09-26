@@ -1,4 +1,4 @@
-### Go microservice v2 framework develop note
+### Go microservice v2 framework development note
 
 - [编译环境](./docs/编译环境.md)
 - [安装微服](./docs/安装微服.md)

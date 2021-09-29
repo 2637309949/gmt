@@ -1,71 +1,99 @@
+// Package log provides a log interface
 package logger
 
 import (
 	"io"
 	"os"
 
-	"github.com/micro/go-micro/v2/logger"
-	lgs "github.com/micro/go-plugins/logger/logrus/v2"
 	"github.com/sirupsen/logrus"
 )
 
-var l logger.Logger
+// Logger is a generic logging interface
+type Logger interface {
+	// Init initialises options
+	Init(options ...Option) error
+	// The Logger options
+	Options() Options
+	// Fields set fields to always be logged
+	Fields(fields map[string]interface{}) Logger
+	// Log writes a log entry
+	Log(level logrus.Level, v ...interface{})
+	// Logf writes a formatted log entry
+	Logf(level logrus.Level, format string, v ...interface{})
+	// String returns the name of logger
+	String() string
+}
 
-func init() {
-	logrusLogger := logrus.New()
-	l = logger.NewHelper(logger.NewLogger(lgs.WithLogger(logrusLogger)))
+func Init(opts ...Option) error {
+	return DefaultLogger.Init(opts...)
+}
+
+func Fields(fields map[string]interface{}) Logger {
+	return DefaultLogger.Fields(fields)
+}
+
+func Log(level logrus.Level, v ...interface{}) {
+	DefaultLogger.Log(level, v...)
+}
+
+func Logf(level logrus.Level, format string, v ...interface{}) {
+	DefaultLogger.Logf(level, format, v...)
+}
+
+func String() string {
+	return DefaultLogger.String()
 }
 
 func Out() io.Writer {
-	return l.Options().Out
+	return DefaultLogger.Options().Out
 }
 
 func Info(args ...interface{}) {
-	l.Log(logger.InfoLevel, args...)
+	Log(logrus.InfoLevel, args...)
 }
 
 func Infof(template string, args ...interface{}) {
-	l.Logf(logger.InfoLevel, template, args...)
+	Logf(logrus.InfoLevel, template, args...)
 }
 
 func Trace(args ...interface{}) {
-	l.Log(logger.TraceLevel, args...)
+	Log(logrus.TraceLevel, args...)
 }
 
 func Tracef(template string, args ...interface{}) {
-	l.Logf(logger.TraceLevel, template, args...)
+	Logf(logrus.TraceLevel, template, args...)
 }
 
 func Debug(args ...interface{}) {
-	l.Log(logger.DebugLevel, args...)
+	Log(logrus.DebugLevel, args...)
 }
 
 func Debugf(template string, args ...interface{}) {
-	l.Logf(logger.DebugLevel, template, args...)
+	Logf(logrus.DebugLevel, template, args...)
 }
 
 func Warn(args ...interface{}) {
-	l.Log(logger.WarnLevel, args...)
+	Log(logrus.WarnLevel, args...)
 }
 
 func Warnf(template string, args ...interface{}) {
-	l.Logf(logger.WarnLevel, template, args...)
+	Logf(logrus.WarnLevel, template, args...)
 }
 
 func Error(args ...interface{}) {
-	l.Log(logger.ErrorLevel, args...)
+	Log(logrus.ErrorLevel, args...)
 }
 
 func Errorf(template string, args ...interface{}) {
-	l.Logf(logger.ErrorLevel, template, args...)
+	Logf(logrus.ErrorLevel, template, args...)
 }
 
 func Fatal(args ...interface{}) {
-	l.Log(logger.FatalLevel, args...)
+	Log(logrus.FatalLevel, args...)
 	os.Exit(1)
 }
 
 func Fatalf(template string, args ...interface{}) {
-	l.Logf(logger.FatalLevel, template, args...)
+	Logf(logrus.FatalLevel, template, args...)
 	os.Exit(1)
 }

@@ -1,7 +1,6 @@
 package conf
 
 import (
-	"comm/logger"
 	"comm/util/base"
 	"encoding/json"
 	"flag"
@@ -10,12 +9,16 @@ import (
 
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/reader"
+	"github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-plugins/config/source/consul/v2"
+	lgs "github.com/micro/go-plugins/logger/logrus/v2"
+	"github.com/sirupsen/logrus"
 )
 
 var (
 	gtv  map[string]reader.Value
 	conf config.Config
+	l    logger.Logger
 )
 
 type Config interface {
@@ -28,6 +31,8 @@ type Config interface {
 }
 
 func init() {
+	logrusLogger := logrus.New()
+	l = logger.NewHelper(logger.NewLogger(lgs.WithLogger(logrusLogger)))
 	gtv = map[string]reader.Value{}
 	address := *flag.String("consul", "", "consul address")
 	flag.Parse()
@@ -38,7 +43,7 @@ func init() {
 	}
 	address = base.Some(address, "127.0.0.1:8500").(string)
 
-	logger.Infof("configuration center address %v", address)
+	l.Logf(logger.InfoLevel, "configuration center address %v", address)
 	source := consul.NewSource(
 		consul.WithAddress(address),
 		consul.WithPrefix("/micro/config"),
@@ -47,7 +52,7 @@ func init() {
 	var err error
 	conf, err = config.NewConfig()
 	if err != nil {
-		logger.Errorf("NewConfig error %v", err)
+		l.Logf(logger.ErrorLevel, "NewConfig error %v", err)
 	}
 	conf.Load(source)
 }
@@ -76,11 +81,11 @@ func Get(key ...string) reader.Value {
 	go func(key string) {
 		w, err := conf.Watch(strings.Split(key, ".")...)
 		if err != nil {
-			logger.Error(err)
+			l.Log(logger.ErrorLevel, err)
 		}
 		v, err := w.Next()
 		if err != nil {
-			logger.Error(err)
+			l.Log(logger.ErrorLevel, err)
 		}
 		gtv[key] = v
 	}(k)

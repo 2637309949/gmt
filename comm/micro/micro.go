@@ -5,6 +5,7 @@ import (
 	"comm/logger"
 	"fmt"
 	"io"
+	"net/http"
 	"strings"
 	"time"
 
@@ -16,12 +17,14 @@ import (
 	"github.com/micro/go-micro/v2/registry/cache"
 	"github.com/micro/go-micro/v2/server"
 	"github.com/micro/go-micro/v2/transport/grpc"
+	"github.com/micro/go-micro/v2/web"
 	brokerNats "github.com/micro/go-plugins/broker/nats/v2"
 	"github.com/micro/go-plugins/registry/consul/v2"
 	breakerHystrix "github.com/micro/go-plugins/wrapper/breaker/hystrix/v2"
 	monitoringPrometheus "github.com/micro/go-plugins/wrapper/monitoring/prometheus/v2"
 	traceOpentracing "github.com/micro/go-plugins/wrapper/trace/opentracing/v2"
 	"github.com/opentracing/opentracing-go"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/uber/jaeger-client-go"
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 )
@@ -115,6 +118,19 @@ func NewService(opts ...micro.Option) micro.Service {
 
 	srv := micro.NewService(opts...)
 	defer srv.Init()
+	defer func() {
+		opts := []web.Option{}
+		opts = append(opts, web.Name(NameFormat(GetServiceName())+".metrics"))
+		opts = append(opts, web.Handler(http.DefaultServeMux))
+		opts = append(opts, web.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
+		metrics := web.NewService(opts...)
+		go func() {
+			http.Handle("/metrics", promhttp.Handler())
+			if err := metrics.Run(); err != nil {
+				logger.Fatalf("failed to serve: %v", err)
+			}
+		}()
+	}()
 	return srv
 }
 

@@ -117,7 +117,6 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
 
 	srv := micro.NewService(opts...)
-	defer srv.Init()
 	defer func() {
 		opts := []web.Option{}
 		opts = append(opts, web.Name(NameFormat(GetServiceName())+".metrics"))
@@ -131,6 +130,7 @@ func NewService(opts ...micro.Option) micro.Service {
 			}
 		}()
 	}()
+	defer srv.Init()
 	return srv
 }
 

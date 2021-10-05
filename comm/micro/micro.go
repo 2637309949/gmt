@@ -134,9 +134,9 @@ func NewService(opts ...micro.Option) micro.Service {
 	return srv
 }
 
-// NewEvent creates a new event publisher
-func NewEvent(topic string, c client.Client) micro.Event {
-	return micro.NewEvent(topic, c)
+// NewPublisher creates a new event publisher
+func NewPublisher(topic string, c client.Client) micro.Publisher {
+	return micro.NewPublisher(topic, c)
 }
 
 // RegisterHandler is syntactic sugar for registering a handler

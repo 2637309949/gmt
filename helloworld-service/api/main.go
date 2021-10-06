@@ -10,8 +10,7 @@ import (
 func main() {
 	app := micro.NewServiceWithName(micro.NameFormat("api.helloworld"))
 	micro.RegisterHandler(app.Server(), &handler.Handler{
-		HelloworldEvent:  micro.NewEvent(micro.NameFormat("srv.helloworld"), app.Client()),
-		HelloworldClient: helloworld.NewHelloworldService(micro.NameFormat("srv.helloworld"), app.Client()),
+		HelloworldService: helloworld.NewHelloworldService(micro.NameFormat("srv.helloworld"), app.Client()),
 	})
 	if err := app.Run(); err != nil {
 		logger.Fatal(err)

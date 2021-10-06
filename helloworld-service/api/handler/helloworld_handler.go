@@ -18,7 +18,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_a
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.HelloworldClient.ArticleAdd(ctx, &r))
+	return response.Build(h.HelloworldService.ArticleAdd(ctx, &r))
 }
 
 func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
@@ -30,7 +30,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_a
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.HelloworldClient.ArticleDel(ctx, &r))
+	return response.Build(h.HelloworldService.ArticleDel(ctx, &r))
 }
 
 func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
@@ -42,7 +42,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *g
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.HelloworldClient.ArticleUpdate(ctx, &r))
+	return response.Build(h.HelloworldService.ArticleUpdate(ctx, &r))
 }
 
 func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
@@ -54,7 +54,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_a
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.HelloworldClient.ArticleOne(ctx, &r))
+	return response.Build(h.HelloworldService.ArticleOne(ctx, &r))
 }
 
 func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
@@ -66,5 +66,5 @@ func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.HelloworldClient.ArticlePage(ctx, &r))
+	return response.Build(h.HelloworldService.ArticlePage(ctx, &r))
 }

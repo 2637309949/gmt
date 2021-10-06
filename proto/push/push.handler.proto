@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package push;
-
-import "push/push.proto";
-
-service Push {
-	rpc PushEventT1(EventT1) returns (EventT1) {}
-}

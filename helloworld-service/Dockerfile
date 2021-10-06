@@ -1,3 +1,5 @@
 FROM alpine
-ADD helloworld-service /helloworld-service
+ADD srv.helloworld /srv.helloworld
+ADD api.helloworld /api.helloworld
+
 ENTRYPOINT [ "/helloworld-service" ]

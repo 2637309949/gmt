@@ -29,8 +29,11 @@ import (
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 )
 
-var DefaultServiceNamePrefix = "go.micro."
-var name string
+var (
+	name                     string
+	DefaultServiceNamePrefix = "go.micro."
+	DefaultMetricsNameSuffix = ".metrics"
+)
 
 // GetServiceName defined TODO
 func GetServiceName() string {
@@ -150,5 +153,5 @@ func RegisterSubscriber(topic string, s server.Server, h interface{}, opts ...se
 }
 
 func metricsNameFormat(metrics string) string {
-	return fmt.Sprintf("%v.metrics", metrics)
+	return fmt.Sprintf("%v%v", metrics, DefaultMetricsNameSuffix)
 }

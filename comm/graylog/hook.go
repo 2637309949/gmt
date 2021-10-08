@@ -62,6 +62,7 @@ func NewGraylogHook(addr string, extra map[string]interface{}) *GraylogHook {
 		Level:       logrus.DebugLevel,
 		gelfLogger:  g,
 		synchronous: true,
+		buf:         make(chan graylogEntry, BufSize),
 	}
 	return hook
 }

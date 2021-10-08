@@ -29,8 +29,11 @@ import (
 	jaegercfg "github.com/uber/jaeger-client-go/config"
 )
 
-var DefaultServiceNamePrefix = "go.micro."
-var name string
+var (
+	name                     string
+	DefaultServiceNamePrefix = "go.micro."
+	DefaultMetricsNameSuffix = ".metrics"
+)
 
 // GetServiceName defined TODO
 func GetServiceName() string {
@@ -119,7 +122,7 @@ func NewService(opts ...micro.Option) micro.Service {
 	srv := micro.NewService(opts...)
 	defer func() {
 		opts := []web.Option{}
-		opts = append(opts, web.Name(NameFormat(GetServiceName())+".metrics"))
+		opts = append(opts, web.Name(NameFormat(metricsNameFormat(GetServiceName()))))
 		opts = append(opts, web.Handler(http.DefaultServeMux))
 		opts = append(opts, web.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
 		metrics := web.NewService(opts...)
@@ -147,4 +150,8 @@ func RegisterHandler(s server.Server, h interface{}, opts ...server.HandlerOptio
 // RegisterSubscriber is syntactic sugar for registering a subscriber
 func RegisterSubscriber(topic string, s server.Server, h interface{}, opts ...server.SubscriberOption) error {
 	return micro.RegisterSubscriber(topic, s, h, opts...)
+}
+
+func metricsNameFormat(metrics string) string {
+	return fmt.Sprintf("%v%v", metrics, DefaultMetricsNameSuffix)
 }

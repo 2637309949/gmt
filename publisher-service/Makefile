@@ -2,7 +2,7 @@
 GOPATH:=$(shell go env GOPATH)
 MODIFY=Mproto/imports/api.proto=github.com/micro/go-micro/v2/api/proto
 
-FILES= $(wildcard ../proto/helloworld/*.proto)
+FILES= $(wildcard ../proto/publisher/*.proto)
 
 .PHONY: proto
 proto:
@@ -10,8 +10,8 @@ proto:
 
 .PHONY: build
 build: proto
-	go build -o api.helloworld api/*.go
-	go build -o srv.helloworld srv/*.go
+	go build -o api.publisher api/*.go
+	go build -o srv.publisher srv/*.go
 
 .PHONY: test
 test:
@@ -19,8 +19,8 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t helloworld-service:latest
+	docker build . -t publisher-service:latest
 
 .PHONY: clean
 clean:
-	rm srv.helloworld api.helloworld
+	rm srv.publisher api.publisher

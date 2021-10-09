@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package aggregate;
+
+import "aggregate/aggregate.proto";
+
+service Aggregate {
+}

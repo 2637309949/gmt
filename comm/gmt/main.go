@@ -1,7 +1,7 @@
 package main
 
 import (
-	"comm/gmt/cmd"
+	"gmt/cmd"
 
 	"github.com/sirupsen/logrus"
 )

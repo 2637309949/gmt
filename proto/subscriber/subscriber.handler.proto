@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package subscriber;
 
-import "subscriber/subscriber.proto";
+import "proto/subscriber/subscriber.proto";
 
 service Subscriber {
 }

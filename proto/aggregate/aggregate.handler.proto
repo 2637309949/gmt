@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package aggregate;
 
-import "aggregate/aggregate.proto";
+import "proto/aggregate/aggregate.proto";
 
 service Aggregate {
 }

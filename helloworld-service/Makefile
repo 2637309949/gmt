@@ -15,7 +15,7 @@ FILES= $(wildcard ../proto/helloworld/*.proto)
 
 .PHONY: proto
 proto:
-	protoc --proto_path=../proto --micro_out=${MODIFY}:../proto --go_out=${MODIFY}:../proto ${FILES}
+	protoc --proto_path=../ --micro_out=${MODIFY}:../ --go_out=${MODIFY}:../ ${FILES}
 
 .PHONY: build
 build:

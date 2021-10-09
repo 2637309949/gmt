@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package helloworld;
 
-import "helloworld/helloworld.proto";
+import "proto/helloworld/helloworld.proto";
 
 service Helloworld {
 	rpc ArticleAdd(Article) returns (Article) {}

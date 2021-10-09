@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "./helloworld-service"
+		},
+		{
+			"path": "./publisher-service"
+		},
+		{
+			"path": "./subscriber-service"
+		},
+		{
+			"path": "./aggregate-service"
+		},
+		{
+			"path": "./proto"
+		},
+		{
+			"path": "."
+		},
+    ],
+    "settings": {}
+}

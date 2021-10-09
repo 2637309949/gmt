@@ -32,7 +32,7 @@ func isExist(path string) bool {
 
 var initd = &cobra.Command{
 	Use:   "init",
-	Short: "init a micro collection",
+	Short: "Init a micro collection",
 	RunE: func(_ *cobra.Command, args []string) error {
 		if len(args) < 1 {
 			return errors.New("please provide the collection name")

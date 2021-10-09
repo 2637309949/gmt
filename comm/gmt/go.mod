@@ -1,4 +1,4 @@
-module gmt
+module github.com/2637309949/gmt/comm/gmt
 
 go 1.14
 

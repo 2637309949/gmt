@@ -1,3 +1,9 @@
+### Install gmt
+
+```shell
+go get -u github.com/2637309949/gmt/comm/gmt
+```
+
 ### Go microservice v2 framework development note
 
 - [编译环境](./docs/编译环境.md)

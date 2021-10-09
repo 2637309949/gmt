@@ -1,7 +1,23 @@
 ### Install gmt
 
 ```shell
-go get -u github.com/2637309949/gmt/comm/gmt
+$go get -u github.com/2637309949/gmt/comm/gmt
+$gmt
+Code generation tool for go-micro
+
+Usage:
+  gmt [command]
+
+Available Commands:
+  add         add handler
+  help        Help about any command
+  init        init a micro collection
+  new         new service
+
+Flags:
+  -h, --help   help for gmt
+
+Use "gmt [command] --help" for more information about a command.
 ```
 
 ### Go microservice v2 framework development note

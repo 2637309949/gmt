@@ -1,8 +1,10 @@
 ### Install gmt
 
 ```shell
-$go get -u github.com/2637309949/gmt/comm/gmt
-$gmt
+go get -u github.com/2637309949/gmt/comm/gmt
+```
+
+```
 Code generation tool for go-micro
 
 Usage:

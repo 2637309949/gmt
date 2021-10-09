@@ -22,8 +22,6 @@ Flags:
 Use "gmt [command] --help" for more information about a command.
 ```
 
-### Document
-
 - [编译环境](./docs/编译环境.md)
 - [安装微服](./docs/安装微服.md)
 - [编译网关](./docs/编译网关.md)

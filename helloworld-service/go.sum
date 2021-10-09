@@ -14,6 +14,10 @@ contrib.go.opencensus.io/exporter/ocagent v0.4.12/go.mod h1:450APlNTSR6FrvC3CTRq
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a h1:lSA0F4e9A2NcQSqGqTOXqu2aRi/XEQxDCBwM8yJtE6s=
 gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a/go.mod h1:EXuID2Zs0pAQhH8yz+DNjUbjppKQzKFAn28TMYPB6IU=
+github.com/2637309949/gmt/comm v0.0.0-20211009094502-0309d19a1e45 h1:bnDVJFbcIkaEk7qLbfB9aGnLA2YStdJ0eJXX1rZ7sKY=
+github.com/2637309949/gmt/comm v0.0.0-20211009094502-0309d19a1e45/go.mod h1:3qEYrKIc++YjAKjz5quqGczj1rhEpJMjYd1aK4kb8GU=
+github.com/2637309949/gmt/proto v0.0.0-20211009094502-0309d19a1e45 h1:3AqI1woKNVLhGSao5mCA5Sgu64R3V9Hy0Q1QQGN41wU=
+github.com/2637309949/gmt/proto v0.0.0-20211009094502-0309d19a1e45/go.mod h1:Tgl++oR2W0LRCdRw0UWoosr43ZKrBiQYQDRlb1IfQXg=
 github.com/Azure/azure-sdk-for-go v32.4.0+incompatible/go.mod h1:9XXNKU+eRnpl9moKnB4QOLf1HestfXbmab5FXxiDBjc=
 github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78/go.mod h1:LmzpDX56iTiv29bbRTIsUNlaFfuhWRQBWjQdVyAevI8=
 github.com/Azure/go-autorest/autorest v0.1.0/go.mod h1:AKyIcETwSUFxIcs/Wnq/C+kwCtlEYGUVd7FPNb2slmg=
@@ -176,8 +180,6 @@ github.com/forestgiant/sliceutil v0.0.0-20160425183142-94783f95db6c/go.mod h1:pF
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsouza/go-dockerclient v1.6.0/go.mod h1:YWwtNPuL4XTX1SKJQk86cWPmmqwx+4np9qfPbb+znGc=
-github.com/gemnasium/logrus-graylog-hook v1.1.2 h1:vDBcfT+RjDrQYgTJ8pQwF0soLsyXBqAGcvLy26kXAm8=
-github.com/gemnasium/logrus-graylog-hook v2.0.7+incompatible h1:lgnKqRfXdYPljf5yj0SOYSH+i29U8E3KKzdOIWsHZno=
 github.com/gemnasium/logrus-graylog-hook/v3 v3.0.3 h1:YQHp/LxUTeZhgnXKbJASRii315h+HWtPd5ctewP4Pms=
 github.com/gemnasium/logrus-graylog-hook/v3 v3.0.3/go.mod h1:wi1zWv9tIvyLSMLCAzgRP+YR24oLVQVBHfPPKjtht44=
 github.com/ghodss/yaml v1.0.0 h1:wQHKEahhL6wmXdzwWG11gIVCkOv05bNOh+Rxn0yngAk=
@@ -408,7 +410,6 @@ github.com/micro/go-plugins/wrapper/monitoring/prometheus/v2 v2.9.1 h1:deucqwZl4
 github.com/micro/go-plugins/wrapper/monitoring/prometheus/v2 v2.9.1/go.mod h1:pVkgwsTnEzYjuluuGKCVhaoRSbxSUcZA0nuFOcVejig=
 github.com/micro/go-plugins/wrapper/trace/opentracing/v2 v2.9.1 h1:5wnqJv5RLyVQArcZI6qhPJt7tLi6W8cnvNcC0dfy8x0=
 github.com/micro/go-plugins/wrapper/trace/opentracing/v2 v2.9.1/go.mod h1:JyDIUQgJ0noSBbxW2cuNWVAxmKXF5VeTbJ8JY1S1160=
-github.com/micro/micro v1.18.0 h1:v+xiQOXbT9xxotLwu1nJM81t4FbruBxZSSyIdhUfujM=
 github.com/micro/micro/v2 v2.9.3 h1:20tSy6OEFQFcxQpSj+MRWpwtJPzXP1upCX3V9KsG3Wk=
 github.com/micro/micro/v2 v2.9.3/go.mod h1:YsjUsRTTjtBw07MnEYeglNLCZjgvrbmdQFKfTuC9AYk=
 github.com/miekg/dns v1.0.14/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=

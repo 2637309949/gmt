@@ -13,9 +13,9 @@ require (
 	github.com/bndr/gotabulate v1.1.2 // indirect
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/gemnasium/logrus-graylog-hook/v3 v3.0.3
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/golang/protobuf v1.5.2
+	github.com/lib/pq v1.3.0
 	github.com/mattn/go-sqlite3 v1.14.8 // indirect
 	github.com/micro/go-micro/v2 v2.9.1
 	github.com/micro/go-plugins/broker/nats/v2 v2.9.1

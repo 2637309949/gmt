@@ -11,6 +11,7 @@ var Root = &cobra.Command{
 }
 
 func init() {
+	Root.AddCommand(initd)
 	Root.AddCommand(new)
 	Root.AddCommand(add)
 }

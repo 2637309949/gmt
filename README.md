@@ -11,10 +11,10 @@ Usage:
   gmt [command]
 
 Available Commands:
-  add         add handler
+  add         Add handler
   help        Help about any command
-  init        init a micro collection
-  new         new service
+  init        Init a micro collection
+  new         New service
 
 Flags:
   -h, --help   help for gmt

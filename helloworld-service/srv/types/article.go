@@ -1,6 +1,7 @@
 package types
 
 import (
+	"encoding/json"
 	"time"
 
 	"github.com/shopspring/decimal"
@@ -52,7 +53,19 @@ type Article struct {
 	Remark string `xorm:"varchar(200) comment('备注') 'remark'" json:"remark" form:"remark" xml:"remark"`
 }
 
-// TableName table name of defined Article
+// TableName defined TODO
 func (m *Article) TableName() string {
 	return "article"
+}
+
+// Marshal defined TODO
+func (r *Article) Marshal() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+// UnmarshalArticle defined TODO
+func UnmarshalArticle(data []byte) (Article, error) {
+	var r Article
+	err := json.Unmarshal(data, &r)
+	return r, err
 }

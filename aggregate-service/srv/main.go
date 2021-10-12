@@ -9,7 +9,7 @@ import (
 
 func main() {
 	app := micro.NewServiceWithName(micro.NameFormat("srv.aggregate"))
-	aggregate.RegisterAggregateHandler(app.Server(), new(handler.Handler))
+	aggregate.RegisterAggregateHandler(app.Server(), &handler.Handler{})
 	if err := app.Run(); err != nil {
 		logger.Fatal(err)
 	}

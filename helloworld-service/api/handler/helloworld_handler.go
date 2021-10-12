@@ -9,6 +9,11 @@ import (
 	go_api "github.com/micro/go-micro/v2/api/proto"
 )
 
+// Reference imports to suppress errors if they are not otherwise used.
+var _ = helloworld.Article{}
+var _ = api.Request{}
+var _ = logger.Info
+
 func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticleAdd request")
 

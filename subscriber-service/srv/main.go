@@ -8,7 +8,7 @@ import (
 
 func main() {
 	app := micro.NewServiceWithName(micro.NameFormat("srv.subscriber"))
-	micro.RegisterSubscriber(micro.NameFormat("srv.push.t1"), app.Server(), new(subscriber.Subscriber))
+	micro.RegisterSubscriber(micro.NameFormat("srv.push.t1"), app.Server(), &subscriber.Subscriber{})
 	if err := app.Run(); err != nil {
 		logger.Fatal(err)
 	}

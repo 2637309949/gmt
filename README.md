@@ -11,7 +11,6 @@ Usage:
   gmt [command]
 
 Available Commands:
-  add         Add handler
   help        Help about any command
   init        Init a micro collection
   new         New service

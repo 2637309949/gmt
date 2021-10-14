@@ -46,11 +46,7 @@ type graylogEntry struct {
 
 // NewGraylogHook creates a hook to be added to an instance of logger.
 func NewGraylogHook(addr string, extra map[string]interface{}) *GraylogHook {
-	g, err := NewWriter(addr)
-	if err != nil {
-		logrus.WithError(err).Error("Can't create Gelf logger")
-	}
-
+	g, _ := NewWriter(addr)
 	host, err := os.Hostname()
 	if err != nil {
 		host = "localhost"
@@ -71,11 +67,7 @@ func NewGraylogHook(addr string, extra map[string]interface{}) *GraylogHook {
 // The hook created will be asynchronous, and it's the responsibility of the user to call the Flush method
 // before exiting to empty the log queue.
 func NewAsyncGraylogHook(addr string, extra map[string]interface{}) *GraylogHook {
-	g, err := NewWriter(addr)
-	if err != nil {
-		logrus.WithError(err).Error("Can't create Gelf logger")
-	}
-
+	g, _ := NewWriter(addr)
 	host, err := os.Hostname()
 	if err != nil {
 		host = "localhost"

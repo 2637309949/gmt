@@ -4,10 +4,12 @@ go 1.13
 
 require (
 	comm v0.0.0-00010101000000-000000000000
-	github.com/2637309949/file2proto v0.0.0-20211014141849-e562b6497d5f // indirect
 	github.com/micro/go-micro/v2 v2.9.1
 	github.com/shopspring/decimal v1.2.0
 	github.com/xormplus/xorm v0.0.0-20210822100304-4e1d4fcc1e67
+	golang.org/x/mod v0.5.1 // indirect
+	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
+	golang.org/x/tools v0.1.7 // indirect
 	proto v0.0.0-00010101000000-000000000000
 )
 

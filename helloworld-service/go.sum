@@ -14,8 +14,6 @@ contrib.go.opencensus.io/exporter/ocagent v0.4.12/go.mod h1:450APlNTSR6FrvC3CTRq
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a h1:lSA0F4e9A2NcQSqGqTOXqu2aRi/XEQxDCBwM8yJtE6s=
 gitea.com/xorm/sqlfiddle v0.0.0-20180821085327-62ce714f951a/go.mod h1:EXuID2Zs0pAQhH8yz+DNjUbjppKQzKFAn28TMYPB6IU=
-github.com/2637309949/file2proto v0.0.0-20211014141849-e562b6497d5f h1:ADBGj1VN5mj5U1aajYYQXh+JtMTHf9u6qnmXJqU3iWc=
-github.com/2637309949/file2proto v0.0.0-20211014141849-e562b6497d5f/go.mod h1:7PhWKBy5DCoVCm19ubJmG3UjvI+YZp7dAmzmnUGp0KI=
 github.com/2637309949/gmt/comm v0.0.0-20211009094502-0309d19a1e45 h1:bnDVJFbcIkaEk7qLbfB9aGnLA2YStdJ0eJXX1rZ7sKY=
 github.com/2637309949/gmt/comm v0.0.0-20211009094502-0309d19a1e45/go.mod h1:3qEYrKIc++YjAKjz5quqGczj1rhEpJMjYd1aK4kb8GU=
 github.com/2637309949/gmt/proto v0.0.0-20211009094502-0309d19a1e45 h1:3AqI1woKNVLhGSao5mCA5Sgu64R3V9Hy0Q1QQGN41wU=
@@ -724,6 +722,7 @@ golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6/go.mod h1:RxMgew5VJxzue5/jJ
 golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e h1:vcxGaoTs7kV8m5Np9uUNQin4BrLOthgV7252N8V+FwY=
 golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+golang.org/x/sync v0.0.0-20210220032951-036812b2e83c h1:5KslGYwFpkhGh+Q16bwMP3cOontH8FOep7tGV86Y7SQ=
 golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sys v0.0.0-20180622082034-63fc586f45fe/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20180823144017-11551d06cbcc/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=

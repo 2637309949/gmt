@@ -1,3 +1,9 @@
 package handler
 
-type Handler struct{}
+import (
+	"github.com/olivere/elastic"
+)
+
+type Handler struct {
+	EsClient *elastic.Client
+}

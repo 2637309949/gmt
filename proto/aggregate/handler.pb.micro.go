@@ -42,6 +42,7 @@ func NewAggregateEndpoints() []*api.Endpoint {
 // Client API for Aggregate service
 
 type AggregateService interface {
+	UploadDoc(ctx context.Context, in *UploadDocReq, opts ...client.CallOption) (*UploadDocRes, error)
 }
 
 type aggregateService struct {
@@ -56,13 +57,25 @@ func NewAggregateService(name string, c client.Client) AggregateService {
 	}
 }
 
+func (c *aggregateService) UploadDoc(ctx context.Context, in *UploadDocReq, opts ...client.CallOption) (*UploadDocRes, error) {
+	req := c.c.NewRequest(c.name, "Aggregate.UploadDoc", in)
+	out := new(UploadDocRes)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Aggregate service
 
 type AggregateHandler interface {
+	UploadDoc(context.Context, *UploadDocReq, *UploadDocRes) error
 }
 
 func RegisterAggregateHandler(s server.Server, hdlr AggregateHandler, opts ...server.HandlerOption) error {
 	type aggregate interface {
+		UploadDoc(ctx context.Context, in *UploadDocReq, out *UploadDocRes) error
 	}
 	type Aggregate struct {
 		aggregate
@@ -73,4 +86,8 @@ func RegisterAggregateHandler(s server.Server, hdlr AggregateHandler, opts ...se
 
 type aggregateHandler struct {
 	AggregateHandler
+}
+
+func (h *aggregateHandler) UploadDoc(ctx context.Context, in *UploadDocReq, out *UploadDocRes) error {
+	return h.AggregateHandler.UploadDoc(ctx, in, out)
 }

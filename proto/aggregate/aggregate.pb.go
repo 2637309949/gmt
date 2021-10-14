@@ -20,12 +20,97 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type UploadDocReq struct {
+	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UploadDocReq) Reset()         { *m = UploadDocReq{} }
+func (m *UploadDocReq) String() string { return proto.CompactTextString(m) }
+func (*UploadDocReq) ProtoMessage()    {}
+func (*UploadDocReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a9fa8af3bbc621ad, []int{0}
+}
+
+func (m *UploadDocReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UploadDocReq.Unmarshal(m, b)
+}
+func (m *UploadDocReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UploadDocReq.Marshal(b, m, deterministic)
+}
+func (m *UploadDocReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UploadDocReq.Merge(m, src)
+}
+func (m *UploadDocReq) XXX_Size() int {
+	return xxx_messageInfo_UploadDocReq.Size(m)
+}
+func (m *UploadDocReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_UploadDocReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UploadDocReq proto.InternalMessageInfo
+
+func (m *UploadDocReq) GetDocId() int64 {
+	if m != nil {
+		return m.DocId
+	}
+	return 0
+}
+
+type UploadDocRes struct {
+	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UploadDocRes) Reset()         { *m = UploadDocRes{} }
+func (m *UploadDocRes) String() string { return proto.CompactTextString(m) }
+func (*UploadDocRes) ProtoMessage()    {}
+func (*UploadDocRes) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a9fa8af3bbc621ad, []int{1}
+}
+
+func (m *UploadDocRes) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UploadDocRes.Unmarshal(m, b)
+}
+func (m *UploadDocRes) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UploadDocRes.Marshal(b, m, deterministic)
+}
+func (m *UploadDocRes) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UploadDocRes.Merge(m, src)
+}
+func (m *UploadDocRes) XXX_Size() int {
+	return xxx_messageInfo_UploadDocRes.Size(m)
+}
+func (m *UploadDocRes) XXX_DiscardUnknown() {
+	xxx_messageInfo_UploadDocRes.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UploadDocRes proto.InternalMessageInfo
+
+func (m *UploadDocRes) GetDocId() int64 {
+	if m != nil {
+		return m.DocId
+	}
+	return 0
+}
+
+func init() {
+	proto.RegisterType((*UploadDocReq)(nil), "aggregate.UploadDocReq")
+	proto.RegisterType((*UploadDocRes)(nil), "aggregate.UploadDocRes")
+}
+
 func init() { proto.RegisterFile("proto/aggregate/aggregate.proto", fileDescriptor_a9fa8af3bbc621ad) }
 
 var fileDescriptor_a9fa8af3bbc621ad = []byte{
-	// 54 bytes of a gzipped FileDescriptorProto
+	// 95 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2f, 0x28, 0xca, 0x2f,
 	0xc9, 0xd7, 0x4f, 0x4c, 0x4f, 0x2f, 0x4a, 0x4d, 0x4f, 0x2c, 0x49, 0x45, 0xb0, 0xf4, 0xc0, 0x32,
-	0x42, 0x9c, 0x70, 0x81, 0x24, 0x36, 0xb0, 0x88, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x61, 0xae,
-	0xa1, 0x2e, 0x34, 0x00, 0x00, 0x00,
+	0x42, 0x9c, 0x70, 0x01, 0x25, 0x35, 0x2e, 0x9e, 0xd0, 0x82, 0x9c, 0xfc, 0xc4, 0x14, 0x97, 0xfc,
+	0xe4, 0xa0, 0xd4, 0x42, 0x21, 0x31, 0x2e, 0xb6, 0x94, 0xfc, 0xe4, 0xf8, 0xcc, 0x14, 0x09, 0x46,
+	0x05, 0x46, 0x0d, 0xe6, 0x20, 0x28, 0x0f, 0x4d, 0x5d, 0x31, 0x2e, 0x75, 0x49, 0x6c, 0x60, 0x1b,
+	0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x53, 0x19, 0x36, 0x82, 0x84, 0x00, 0x00, 0x00,
 }

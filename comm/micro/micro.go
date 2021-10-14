@@ -3,6 +3,7 @@ package micro
 import (
 	"comm/conf"
 	"comm/logger"
+	"comm/micro/subscriber"
 	"fmt"
 	"io"
 	"net/http"
@@ -118,6 +119,8 @@ func NewService(opts ...micro.Option) micro.Service {
 	opts = append(opts, micro.WrapClient(breakerHystrix.NewClientWrapper()))
 	opts = append(opts, micro.WrapHandler(monitoringPrometheus.NewHandlerWrapper()))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
+	opts = append(opts, micro.WrapHandler(subscriber.NewLogWrapper()))
+	opts = append(opts, micro.WrapSubscriber(subscriber.NewSubscriberLogWrapper()))
 
 	srv := micro.NewService(opts...)
 	defer func() {

@@ -9,5 +9,5 @@ unzip $tempdir/protoc/protoc-3.10.0-linux-x86_64.zip -d $tempdir/protoc/$version
 cp $tempdir/protoc/protoc-3.10.0-linux-x86_64/bin/protoc $GOPATH/bin/ && \
 rm $tempdir -rf && \
 go env -w GOPROXY=https://goproxy.cn,direct && go env -w GO111MODULE=on && \
-go get github.com/golang/protobuf/proto@v1.4.2 github.com/golang/protobuf/protoc-gen-go@v1.4.2 github.com/micro/micro/v2/cmd/protoc-gen-micro github.com/micro/micro/v2@v2.9.3
+go get github.com/golang/protobuf/proto@v1.4.2 github.com/golang/protobuf/protoc-gen-go@v1.4.2 github.com/micro/micro/v2/cmd/protoc-gen-micro github.com/micro/micro/v2@v2.9.3 github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.0
 WORKDIR /

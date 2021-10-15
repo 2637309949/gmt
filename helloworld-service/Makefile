@@ -15,8 +15,7 @@ FILES= $(wildcard ../proto/helloworld/*.proto)
 
 .PHONY: proto
 proto:
-	protoc --proto_path=../ --micro_out=${MODIFY}:../ --go_out=${MODIFY}:../ ${FILES}
-
+	protoc --proto_path=../ --micro_out=${MODIFY}:../ --go_out=${MODIFY}:../ --doc_out=markdown,doc.md:./ ${FILES}
 .PHONY: build
 build:
 	go build -a -installsuffix cgo -ldflags "-w ${LDFLAGS}" -o api.$(shell echo $(NAME) | sed -e "s/-service//g") api/*.go

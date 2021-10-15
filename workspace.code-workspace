@@ -18,6 +18,9 @@
 		{
 			"path": "./comm"
 		},
+		{
+			"path": "./"
+		},
     ],
     "settings": {}
 }

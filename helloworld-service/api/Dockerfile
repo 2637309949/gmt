@@ -3,8 +3,6 @@ COPY . /
 RUN make build
 
 
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates && \
-    rm -rf /var/cache/apk/* /tmp/*
+FROM zhku/alpine:latest
 COPY --from=builder /api.helloworld .
 ENTRYPOINT ["/api.helloworld"]

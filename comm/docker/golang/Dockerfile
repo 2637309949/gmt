@@ -1,4 +1,4 @@
-FROM golang:1.14.11-alpine as builder
+FROM golang:1.14.11-alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk --no-cache add make wget unzip git gcc libtool musl-dev
 RUN tempdir=`mktemp -d /tmp/tmpd.XXXXXX` && \

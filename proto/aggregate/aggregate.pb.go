@@ -21,7 +21,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type UploadDocReq struct {
-	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id,omitempty"`
+	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -60,7 +60,7 @@ func (m *UploadDocReq) GetDocId() int64 {
 }
 
 type UploadDocRes struct {
-	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id,omitempty"`
+	DocId                int64    `protobuf:"varint,1,opt,name=doc_id,proto3" json:"doc_id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`

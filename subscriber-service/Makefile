@@ -16,7 +16,7 @@ FILES= $(wildcard ../proto/subscriber/*.proto)
 .PHONY: proto
 proto:
 	protoc --proto_path=../ --micro_out=${MODIFY}:../ --go_out=${MODIFY}:../ ${FILES}
-
+	sed -i -e 's/,omitempty//g' ../proto/subscriber/*.go
 .PHONY: build
 build:
 	go build -a -installsuffix cgo -ldflags "-w ${LDFLAGS}" -o api.$(shell echo $(NAME) | sed -e "s/-service//g") api/*.go

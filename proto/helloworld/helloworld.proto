@@ -14,27 +14,122 @@ message Article {
     string x_user = 9 [json_name = "x_user"];
 }
 
-message ArticleFilter {
+message ArticleAddReq {
     int64 id = 1 [json_name = "id"];
-	int64 page = 2 [json_name = "page"];
-	int64 size = 3 [json_name = "size"];
-	string order = 4 [json_name = "order"];
-    int64  creater = 5 [json_name = "creater"];
-    string create_time = 6 [json_name = "create_time"];
-    int64  updater = 7 [json_name = "updater"];
-    string update_time = 8 [json_name = "update_time"];
-    string remark = 9 [json_name = "remark"];
-    string name = 10 [json_name = "name"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
 }
 
-message ArticleList {
+message ArticleAddRes {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticleDelReq {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticleDelRes {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticleUpdateReq {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticleUpdateRes {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+
+message ArticleOneReq {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticleOneRes {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+}
+
+message ArticlePageReq {
+    int64 id = 1 [json_name = "id"];
+    int64  creater = 2 [json_name = "creater"];
+    string create_time = 3 [json_name = "create_time"];
+    int64  updater = 4 [json_name = "updater"];
+    string update_time = 5 [json_name = "update_time"];
+    uint32 is_delete = 6 [json_name = "-"];
+    string remark = 7 [json_name = "remark"];
+    string name = 8 [json_name = "name"];
+    string x_user = 9 [json_name = "x_user"];
+    int64 page = 10 [json_name = "page"];
+	int64 size = 11 [json_name = "size"];
+	string order = 12 [json_name = "order"];
+}
+
+message ArticlePageRes {
 	int64 page = 1 [json_name = "page"];
 	int64 size = 2 [json_name = "size"];
 	int64 total_record = 3 [json_name = "total_record"];
 	int64 total_page = 4 [json_name = "total_page"];
     repeated Article data = 5 [json_name = "data"];
-}
-
-message Message {
-	string say = 1;
 }

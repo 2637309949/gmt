@@ -16,7 +16,7 @@ import (
 var _ = helloworld.Article{}
 var _ = logger.Info
 
-func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
+func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq, rsp *helloworld.ArticleAddRes) error {
 	logger.Info("Received ArticleAdd request")
 
 	marker := timer.NewMark()
@@ -49,7 +49,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.Article, rsp *
 	return nil
 }
 
-func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.Article) error {
+func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq, rsp *helloworld.ArticleDelRes) error {
 	logger.Info("Received ArticleDel request")
 
 	marker := timer.NewMark()
@@ -80,7 +80,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleFilter,
 	return nil
 }
 
-func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.Article, rsp *helloworld.Article) error {
+func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpdateReq, rsp *helloworld.ArticleUpdateRes) error {
 	logger.Info("Received ArticleUpdate request")
 
 	marker := timer.NewMark()
@@ -111,7 +111,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.Article, rs
 	return nil
 }
 
-func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.Article) error {
+func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq, rsp *helloworld.ArticleOneRes) error {
 	logger.Info("Received ArticleOne request")
 
 	marker := timer.NewMark()
@@ -142,7 +142,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleFilter,
 	return nil
 }
 
-func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticleFilter, rsp *helloworld.ArticleList) error {
+func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageReq, rsp *helloworld.ArticlePageRes) error {
 	logger.Info("Received ArticlePage request")
 
 	marker := timer.NewMark()

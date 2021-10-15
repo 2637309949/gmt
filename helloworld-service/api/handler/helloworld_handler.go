@@ -18,7 +18,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_a
 	logger.Info("Received ArticleAdd request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := helloworld.Article{}
+	r := helloworld.ArticleAddReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
@@ -30,7 +30,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_a
 	logger.Info("Received ArticleDel request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := helloworld.ArticleFilter{}
+	r := helloworld.ArticleDelReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
@@ -42,7 +42,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *g
 	logger.Info("Received ArticleUpdate request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := helloworld.Article{}
+	r := helloworld.ArticleUpdateReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
@@ -54,7 +54,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_a
 	logger.Info("Received ArticleOne request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := helloworld.ArticleFilter{}
+	r := helloworld.ArticleOneReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
@@ -66,7 +66,7 @@ func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_
 	logger.Info("Received ArticlePage request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := helloworld.ArticleFilter{Page: 1, Size: 20}
+	r := helloworld.ArticlePageReq{Page: 1, Size: 20}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err

@@ -42,11 +42,11 @@ func NewHelloworldEndpoints() []*api.Endpoint {
 // Client API for Helloworld service
 
 type HelloworldService interface {
-	ArticleAdd(ctx context.Context, in *Article, opts ...client.CallOption) (*Article, error)
-	ArticleDel(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*Article, error)
-	ArticleUpdate(ctx context.Context, in *Article, opts ...client.CallOption) (*Article, error)
-	ArticleOne(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*Article, error)
-	ArticlePage(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*ArticleList, error)
+	ArticleAdd(ctx context.Context, in *ArticleAddReq, opts ...client.CallOption) (*ArticleAddRes, error)
+	ArticleDel(ctx context.Context, in *ArticleDelReq, opts ...client.CallOption) (*ArticleDelRes, error)
+	ArticleUpdate(ctx context.Context, in *ArticleUpdateReq, opts ...client.CallOption) (*ArticleUpdateRes, error)
+	ArticleOne(ctx context.Context, in *ArticleOneReq, opts ...client.CallOption) (*ArticleOneRes, error)
+	ArticlePage(ctx context.Context, in *ArticlePageReq, opts ...client.CallOption) (*ArticlePageRes, error)
 }
 
 type helloworldService struct {
@@ -61,9 +61,9 @@ func NewHelloworldService(name string, c client.Client) HelloworldService {
 	}
 }
 
-func (c *helloworldService) ArticleAdd(ctx context.Context, in *Article, opts ...client.CallOption) (*Article, error) {
+func (c *helloworldService) ArticleAdd(ctx context.Context, in *ArticleAddReq, opts ...client.CallOption) (*ArticleAddRes, error) {
 	req := c.c.NewRequest(c.name, "Helloworld.ArticleAdd", in)
-	out := new(Article)
+	out := new(ArticleAddRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,9 +71,9 @@ func (c *helloworldService) ArticleAdd(ctx context.Context, in *Article, opts ..
 	return out, nil
 }
 
-func (c *helloworldService) ArticleDel(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*Article, error) {
+func (c *helloworldService) ArticleDel(ctx context.Context, in *ArticleDelReq, opts ...client.CallOption) (*ArticleDelRes, error) {
 	req := c.c.NewRequest(c.name, "Helloworld.ArticleDel", in)
-	out := new(Article)
+	out := new(ArticleDelRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -81,9 +81,9 @@ func (c *helloworldService) ArticleDel(ctx context.Context, in *ArticleFilter, o
 	return out, nil
 }
 
-func (c *helloworldService) ArticleUpdate(ctx context.Context, in *Article, opts ...client.CallOption) (*Article, error) {
+func (c *helloworldService) ArticleUpdate(ctx context.Context, in *ArticleUpdateReq, opts ...client.CallOption) (*ArticleUpdateRes, error) {
 	req := c.c.NewRequest(c.name, "Helloworld.ArticleUpdate", in)
-	out := new(Article)
+	out := new(ArticleUpdateRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -91,9 +91,9 @@ func (c *helloworldService) ArticleUpdate(ctx context.Context, in *Article, opts
 	return out, nil
 }
 
-func (c *helloworldService) ArticleOne(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*Article, error) {
+func (c *helloworldService) ArticleOne(ctx context.Context, in *ArticleOneReq, opts ...client.CallOption) (*ArticleOneRes, error) {
 	req := c.c.NewRequest(c.name, "Helloworld.ArticleOne", in)
-	out := new(Article)
+	out := new(ArticleOneRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -101,9 +101,9 @@ func (c *helloworldService) ArticleOne(ctx context.Context, in *ArticleFilter, o
 	return out, nil
 }
 
-func (c *helloworldService) ArticlePage(ctx context.Context, in *ArticleFilter, opts ...client.CallOption) (*ArticleList, error) {
+func (c *helloworldService) ArticlePage(ctx context.Context, in *ArticlePageReq, opts ...client.CallOption) (*ArticlePageRes, error) {
 	req := c.c.NewRequest(c.name, "Helloworld.ArticlePage", in)
-	out := new(ArticleList)
+	out := new(ArticlePageRes)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -114,20 +114,20 @@ func (c *helloworldService) ArticlePage(ctx context.Context, in *ArticleFilter, 
 // Server API for Helloworld service
 
 type HelloworldHandler interface {
-	ArticleAdd(context.Context, *Article, *Article) error
-	ArticleDel(context.Context, *ArticleFilter, *Article) error
-	ArticleUpdate(context.Context, *Article, *Article) error
-	ArticleOne(context.Context, *ArticleFilter, *Article) error
-	ArticlePage(context.Context, *ArticleFilter, *ArticleList) error
+	ArticleAdd(context.Context, *ArticleAddReq, *ArticleAddRes) error
+	ArticleDel(context.Context, *ArticleDelReq, *ArticleDelRes) error
+	ArticleUpdate(context.Context, *ArticleUpdateReq, *ArticleUpdateRes) error
+	ArticleOne(context.Context, *ArticleOneReq, *ArticleOneRes) error
+	ArticlePage(context.Context, *ArticlePageReq, *ArticlePageRes) error
 }
 
 func RegisterHelloworldHandler(s server.Server, hdlr HelloworldHandler, opts ...server.HandlerOption) error {
 	type helloworld interface {
-		ArticleAdd(ctx context.Context, in *Article, out *Article) error
-		ArticleDel(ctx context.Context, in *ArticleFilter, out *Article) error
-		ArticleUpdate(ctx context.Context, in *Article, out *Article) error
-		ArticleOne(ctx context.Context, in *ArticleFilter, out *Article) error
-		ArticlePage(ctx context.Context, in *ArticleFilter, out *ArticleList) error
+		ArticleAdd(ctx context.Context, in *ArticleAddReq, out *ArticleAddRes) error
+		ArticleDel(ctx context.Context, in *ArticleDelReq, out *ArticleDelRes) error
+		ArticleUpdate(ctx context.Context, in *ArticleUpdateReq, out *ArticleUpdateRes) error
+		ArticleOne(ctx context.Context, in *ArticleOneReq, out *ArticleOneRes) error
+		ArticlePage(ctx context.Context, in *ArticlePageReq, out *ArticlePageRes) error
 	}
 	type Helloworld struct {
 		helloworld
@@ -140,22 +140,22 @@ type helloworldHandler struct {
 	HelloworldHandler
 }
 
-func (h *helloworldHandler) ArticleAdd(ctx context.Context, in *Article, out *Article) error {
+func (h *helloworldHandler) ArticleAdd(ctx context.Context, in *ArticleAddReq, out *ArticleAddRes) error {
 	return h.HelloworldHandler.ArticleAdd(ctx, in, out)
 }
 
-func (h *helloworldHandler) ArticleDel(ctx context.Context, in *ArticleFilter, out *Article) error {
+func (h *helloworldHandler) ArticleDel(ctx context.Context, in *ArticleDelReq, out *ArticleDelRes) error {
 	return h.HelloworldHandler.ArticleDel(ctx, in, out)
 }
 
-func (h *helloworldHandler) ArticleUpdate(ctx context.Context, in *Article, out *Article) error {
+func (h *helloworldHandler) ArticleUpdate(ctx context.Context, in *ArticleUpdateReq, out *ArticleUpdateRes) error {
 	return h.HelloworldHandler.ArticleUpdate(ctx, in, out)
 }
 
-func (h *helloworldHandler) ArticleOne(ctx context.Context, in *ArticleFilter, out *Article) error {
+func (h *helloworldHandler) ArticleOne(ctx context.Context, in *ArticleOneReq, out *ArticleOneRes) error {
 	return h.HelloworldHandler.ArticleOne(ctx, in, out)
 }
 
-func (h *helloworldHandler) ArticlePage(ctx context.Context, in *ArticleFilter, out *ArticleList) error {
+func (h *helloworldHandler) ArticlePage(ctx context.Context, in *ArticlePageReq, out *ArticlePageRes) error {
 	return h.HelloworldHandler.ArticlePage(ctx, in, out)
 }

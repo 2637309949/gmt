@@ -12,8 +12,9 @@ require (
 	golang.org/x/tools v0.1.7 // indirect
 	proto v0.0.0-00010101000000-000000000000
 )
+replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
 
 replace (
-	comm => github.com/2637309949/gmt/comm v0.0.0-20211009094502-0309d19a1e45
-	proto => github.com/2637309949/gmt/proto v0.0.0-20211009094502-0309d19a1e45
+	comm => ../comm
+	proto => ../proto
 )

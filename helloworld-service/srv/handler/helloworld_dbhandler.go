@@ -9,6 +9,7 @@ import (
 	"github.com/xormplus/xorm"
 )
 
+// ArticleAddDB defined TODO
 func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, item *types.Article) error {
 	logger.Info("Received ArticleAddDB request")
 
@@ -21,6 +22,7 @@ func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, item *types
 	return err
 }
 
+// ArticleDelDB defined TODO
 func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, where *types.Article) error {
 	logger.Info("Received ArticleDelDB request")
 
@@ -35,6 +37,7 @@ func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, where *type
 	return err
 }
 
+// ArticleUpdateDB defined TODO
 func (h *Handler) ArticleUpdateDB(ctx context.Context, db *xorm.Engine, item *types.Article) error {
 	logger.Info("Received ArticleUpdateDB request")
 
@@ -45,6 +48,7 @@ func (h *Handler) ArticleUpdateDB(ctx context.Context, db *xorm.Engine, item *ty
 	return err
 }
 
+// ArticleOneDB defined TODO
 func (h *Handler) ArticleOneDB(ctx context.Context, db *xorm.Engine, where *types.Article, item *types.Article) error {
 	logger.Info("Received ArticleOneDB request")
 
@@ -58,6 +62,7 @@ func (h *Handler) ArticleOneDB(ctx context.Context, db *xorm.Engine, where *type
 	return err
 }
 
+// ArticlePageDB defined TODO
 func (h *Handler) ArticlePageDB(ctx context.Context, db *xorm.Engine, where *types.Article, list *[]types.Article, totalRecord ...*int64) error {
 	logger.Info("Received ArticlePageDB request")
 

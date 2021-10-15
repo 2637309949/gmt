@@ -16,6 +16,7 @@ import (
 var _ = helloworld.Article{}
 var _ = logger.Info
 
+// ArticleAdd defined TODO
 func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq, rsp *helloworld.ArticleAddRes) error {
 	logger.Info("Received ArticleAdd request")
 
@@ -49,6 +50,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq,
 	return nil
 }
 
+// ArticleDel defined TODO
 func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq, rsp *helloworld.ArticleDelRes) error {
 	logger.Info("Received ArticleDel request")
 
@@ -80,6 +82,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq,
 	return nil
 }
 
+// ArticleUpdate defined TODO
 func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpdateReq, rsp *helloworld.ArticleUpdateRes) error {
 	logger.Info("Received ArticleUpdate request")
 
@@ -111,6 +114,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpda
 	return nil
 }
 
+// ArticleOne defined TODO
 func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq, rsp *helloworld.ArticleOneRes) error {
 	logger.Info("Received ArticleOne request")
 
@@ -142,6 +146,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq,
 	return nil
 }
 
+// ArticlePage defined TODO
 func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageReq, rsp *helloworld.ArticlePageRes) error {
 	logger.Info("Received ArticlePage request")
 

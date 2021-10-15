@@ -6,7 +6,6 @@ import (
 	"comm/micro/subscriber"
 	"fmt"
 	"io"
-	"net/http"
 	"strings"
 	"time"
 
@@ -126,11 +125,10 @@ func NewService(opts ...micro.Option) micro.Service {
 	defer func() {
 		opts := []web.Option{}
 		opts = append(opts, web.Name(NameFormat(metricsNameFormat(GetServiceName()))))
-		opts = append(opts, web.Handler(http.DefaultServeMux))
 		opts = append(opts, web.Registry(cache.New(consul.NewRegistry(func(op *registry.Options) { op.Addrs = []string{registryAddress} }))))
 		metrics := web.NewService(opts...)
+		metrics.Handle("/metrics", promhttp.Handler())
 		go func() {
-			http.Handle("/metrics", promhttp.Handler())
 			if err := metrics.Run(); err != nil {
 				logger.Fatalf("failed to serve: %v", err)
 			}
@@ -142,7 +140,7 @@ func NewService(opts ...micro.Option) micro.Service {
 
 // NewPublisher creates a new event publisher
 func NewPublisher(topic string, c client.Client) micro.Publisher {
-	return micro.NewPublisher(topic, c)
+	return micro.NewEvent(topic, c)
 }
 
 // RegisterHandler is syntactic sugar for registering a handler

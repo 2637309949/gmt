@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package hello;
+
+message Entity {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityAddReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityAddRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityDelReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityDelRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityUpdateReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityUpdateRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityOneReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityOneRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityPageReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityPageRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+

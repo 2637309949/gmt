@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package hello;
+
+import "proto/hello/hello.proto";
+
+service Hello {
+	rpc EntityAdd(EntityAddReq) returns (EntityAddRes) {}
+    rpc EntityDel(EntityDelReq) returns (EntityDelRes) {}
+    rpc EntityUpdate(EntityUpdateReq) returns (EntityUpdateRes) {}
+    rpc EntityOne(EntityOneReq) returns (EntityOneRes) {}
+    rpc EntityPage(EntityPageReq) returns (EntityPageRes) {}
+}

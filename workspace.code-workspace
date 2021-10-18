@@ -19,6 +19,10 @@
 			"path": "./comm"
 		},
 		{
+			"path": "./comm/gmt",
+			"name": "exec"
+		},
+		{
 			"path": "./"
 		},
     ],

@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package {{.name}};
+
+message {{toTitle .entity}} {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}AddReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}AddRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}DelReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}DelRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}UpdateReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}UpdateRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}OneReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}OneRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}PageReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message {{toTitle .entity}}PageRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+

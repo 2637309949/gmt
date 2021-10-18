@@ -36,6 +36,7 @@ require (
 	github.com/opentracing/opentracing-go v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.5.1
+	github.com/shurcooL/httpfs v0.0.0-20190707220628-8d4bc4ba7749
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/cobra v1.2.1
 	github.com/syndtr/goleveldb v1.0.0 // indirect

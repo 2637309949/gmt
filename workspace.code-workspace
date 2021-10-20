@@ -20,7 +20,7 @@
 		},
 		{
 			"path": "./comm/gmt",
-			"name": "exec"
+			"name": "autogen"
 		},
 		{
 			"path": "./"

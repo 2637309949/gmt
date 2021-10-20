@@ -14,6 +14,7 @@ var _ = helloworld.Article{}
 var _ = api.Request{}
 var _ = logger.Info
 
+// ArticleAdd defined TODO
 func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticleAdd request")
 
@@ -26,6 +27,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_a
 	return response.Build(h.HelloworldService.ArticleAdd(ctx, &r))
 }
 
+// ArticleDel defined TODO
 func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticleDel request")
 
@@ -38,6 +40,7 @@ func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_a
 	return response.Build(h.HelloworldService.ArticleDel(ctx, &r))
 }
 
+// ArticleUpdate defined TODO
 func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticleUpdate request")
 
@@ -50,6 +53,7 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *g
 	return response.Build(h.HelloworldService.ArticleUpdate(ctx, &r))
 }
 
+// ArticleOne defined TODO
 func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticleOne request")
 
@@ -62,6 +66,7 @@ func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_a
 	return response.Build(h.HelloworldService.ArticleOne(ctx, &r))
 }
 
+// ArticlePage defined TODO
 func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
 	logger.Info("Received ArticlePage request")
 

@@ -19,8 +19,7 @@
 			"path": "./comm"
 		},
 		{
-			"path": "./comm/gmt",
-			"name": "autogen"
+			"path": "./comm/autogen",
 		},
 		{
 			"path": "./"

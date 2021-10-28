@@ -5,7 +5,7 @@ import (
 )
 
 var Root = &cobra.Command{
-	Use:               "gmt",
+	Use:               "autogen",
 	Long:              `Code generation tool for go-micro`,
 	CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }

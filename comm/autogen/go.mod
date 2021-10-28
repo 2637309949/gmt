@@ -1,4 +1,4 @@
-module github.com/2637309949/gmt/comm/gmt
+module github.com/2637309949/gmt/comm/autogen
 
 go 1.14
 

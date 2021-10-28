@@ -8,9 +8,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/2637309949/gmt/comm/gmt/template/dist"
-	"github.com/2637309949/gmt/comm/gmt/util"
-	"github.com/2637309949/gmt/comm/gmt/util/fs"
+	"github.com/2637309949/gmt/comm/autogen/template/dist"
+	"github.com/2637309949/gmt/comm/autogen/util"
+	"github.com/2637309949/gmt/comm/autogen/util/fs"
 	"github.com/spf13/cobra"
 )
 

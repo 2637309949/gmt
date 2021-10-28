@@ -10,66 +10,66 @@ import (
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = {{.name}}.Article{}
+var _ = {{.name}}.{{toTitle .entity}}{}
 var _ = api.Request{}
 var _ = logger.Info
 
-func (h *Handler) ArticleAdd(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received ArticleAdd request")
+func (h *Handler) {{toTitle .entity}}Add(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .entity}}Add request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.ArticleAddReq{}
+	r := {{.name}}.{{toTitle .entity}}AddReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.ArticleAdd(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Add(ctx, &r))
 }
 
-func (h *Handler) ArticleDel(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received ArticleDel request")
+func (h *Handler) {{toTitle .entity}}Del(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .entity}}Del request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.ArticleDelReq{}
+	r := {{.name}}.{{toTitle .entity}}DelReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.ArticleDel(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Del(ctx, &r))
 }
 
-func (h *Handler) ArticleUpdate(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received ArticleUpdate request")
+func (h *Handler) {{toTitle .entity}}Update(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .entity}}Update request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.ArticleUpdateReq{}
+	r := {{.name}}.{{toTitle .entity}}UpdateReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.ArticleUpdate(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Update(ctx, &r))
 }
 
-func (h *Handler) ArticleOne(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received ArticleOne request")
+func (h *Handler) {{toTitle .entity}}One(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .entity}}One request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.ArticleOneReq{}
+	r := {{.name}}.{{toTitle .entity}}OneReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.ArticleOne(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}One(ctx, &r))
 }
 
-func (h *Handler) ArticlePage(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received ArticlePage request")
+func (h *Handler) {{toTitle .entity}}Page(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .entity}}Page request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.ArticlePageReq{Page: 1, Size: 20}
+	r := {{.name}}.{{toTitle .entity}}PageReq{Page: 1, Size: 20}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.ArticlePage(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Page(ctx, &r))
 }

@@ -9,6 +9,7 @@ require (
 	github.com/micro/go-micro/v2 v2.9.1
 )
 
-replace proto => ../proto
-
-replace comm => ../comm
+replace (
+	comm => ../comm
+	proto => ../proto
+)

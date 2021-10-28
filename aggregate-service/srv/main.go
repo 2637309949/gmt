@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aggregate/srv/handler"
+	"aggregate-service/srv/handler"
 	"comm/logger"
 	"comm/micro"
 	"proto/aggregate"

@@ -1,4 +1,4 @@
-module subscriber
+module subscriber-service
 
 go 1.13
 

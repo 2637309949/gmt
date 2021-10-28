@@ -8,7 +8,7 @@ import (
 	"comm/logger"
 	"comm/timer"
 	"comm/util/deep"
-	"helloworld/srv/types"
+	"helloworld-service/srv/types"
 	"proto/helloworld"
 )
 

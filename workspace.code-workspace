@@ -1,6 +1,12 @@
 {
 	"folders": [
 		{
+			"path": "./comm/autogen",
+		},
+		{
+			"path": "./comm"
+		},
+		{
 			"path": "./helloworld-service"
 		},
 		{
@@ -15,12 +21,7 @@
 		{
 			"path": "./proto"
 		},
-		{
-			"path": "./comm"
-		},
-		{
-			"path": "./comm/autogen",
-		},
+
 		{
 			"path": "./"
 		},

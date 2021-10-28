@@ -39,11 +39,16 @@ message {{toTitle .entity}}OneRes {
 }
 
 message {{toTitle .entity}}PageReq {
-    int64 id = 1 [json_name = "id"];
+    int64 page = 1 [json_name = "page"];
+    int64 size = 2 [json_name = "size"];
 }
 
 message {{toTitle .entity}}PageRes {
-    int64 id = 1 [json_name = "id"];
+	int64 page = 1 [json_name = "page"];
+	int64 size = 2 [json_name = "size"];
+	int64 total_record = 3 [json_name = "total_record"];
+	int64 total_page = 4 [json_name = "total_page"];
+    repeated {{toTitle .entity}} data = 5 [json_name = "data"];
 }
 
 

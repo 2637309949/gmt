@@ -3,7 +3,7 @@ package main
 import (
 	"comm/logger"
 	"comm/micro"
-	"publisher/api/handler"
+	"publisher-service/api/handler"
 )
 
 func main() {

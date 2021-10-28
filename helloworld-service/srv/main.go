@@ -1,7 +1,7 @@
 package main
 
 import (
-	"helloworld/srv/handler"
+	"helloworld-service/srv/handler"
 	"proto/helloworld"
 
 	"comm/logger"

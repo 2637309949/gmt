@@ -1,7 +1,7 @@
 package main
 
 import (
-	"{{.name}}/srv/handler"
+	"{{.name}}-service/srv/handler"
 	"proto/{{.name}}"
 
 	"comm/logger"

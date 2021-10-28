@@ -3,7 +3,7 @@ package handler
 import (
 	"comm/logger"
 	"context"
-	"helloworld/srv/types"
+	"helloworld-service/srv/types"
 	"time"
 
 	"github.com/xormplus/xorm"

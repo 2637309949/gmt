@@ -8,20 +8,20 @@ import (
 	"comm/logger"
 	"comm/timer"
 	"comm/util/deep"
-	"helloworld/srv/types"
-	"proto/helloworld"
+	"{{.name}}-service/srv/types"
+	"proto/{{.name}}"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = helloworld.Article{}
+var _ = {{.name}}.{{toTitle .entity}}{}
 var _ = logger.Info
 
-// ArticleAdd defined TODO
-func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq, rsp *helloworld.ArticleAddRes) error {
-	logger.Info("Received ArticleAdd request")
+// {{toTitle .entity}}Add defined TODO
+func (h *Handler) {{toTitle .entity}}Add(ctx context.Context, req *{{.name}}.{{toTitle .entity}}AddReq, rsp *{{.name}}.{{toTitle .entity}}AddRes) error {
+	logger.Info("Received {{toTitle .entity}}Add request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleAdd")
+	defer marker.Init("{{toTitle .entity}}Add")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
@@ -31,31 +31,31 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq,
 	}
 
 	marker.Mark("Copy req")
-	data := types.Article{}
+	data := types.{{toTitle .entity}}{}
 	err = deep.Copy(&data, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleAddDB")
+	marker.Mark("{{toTitle .entity}}AddDB")
 	data.CreateTime = time.Now()
 	data.UpdateTime = time.Now()
-	err = h.ArticleAddDB(ctx, db, &data)
+	err = h.{{toTitle .entity}}AddDB(ctx, db, &data)
 	if err != nil {
-		logger.Errorf("ArticleAddDB %v", err)
+		logger.Errorf("{{toTitle .entity}}AddDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID
 	return nil
 }
 
-// ArticleDel defined TODO
-func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq, rsp *helloworld.ArticleDelRes) error {
-	logger.Info("Received ArticleDel request")
+// {{toTitle .entity}}Del defined TODO
+func (h *Handler) {{toTitle .entity}}Del(ctx context.Context, req *{{.name}}.{{toTitle .entity}}DelReq, rsp *{{.name}}.{{toTitle .entity}}DelRes) error {
+	logger.Info("Received {{toTitle .entity}}Del request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleDel")
+	defer marker.Init("{{toTitle .entity}}Del")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
@@ -65,29 +65,29 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq,
 	}
 
 	marker.Mark("Copy req")
-	filter := types.Article{}
+	filter := types.{{toTitle .entity}}{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleDelDB")
-	err = h.ArticleDelDB(ctx, db, &filter)
+	marker.Mark("{{toTitle .entity}}DelDB")
+	err = h.{{toTitle .entity}}DelDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleDelDB %v", err)
+		logger.Errorf("{{toTitle .entity}}DelDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID
 	return nil
 }
 
-// ArticleUpdate defined TODO
-func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpdateReq, rsp *helloworld.ArticleUpdateRes) error {
-	logger.Info("Received ArticleUpdate request")
+// {{toTitle .entity}}Update defined TODO
+func (h *Handler) {{toTitle .entity}}Update(ctx context.Context, req *{{.name}}.{{toTitle .entity}}UpdateReq, rsp *{{.name}}.{{toTitle .entity}}UpdateRes) error {
+	logger.Info("Received {{toTitle .entity}}Update request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleUpdate")
+	defer marker.Init("{{toTitle .entity}}Update")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
@@ -97,29 +97,29 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpda
 	}
 
 	marker.Mark("Copy req")
-	filter := types.Article{}
+	filter := types.{{toTitle .entity}}{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleUpdateDB")
-	err = h.ArticleUpdateDB(ctx, db, &filter)
+	marker.Mark("{{toTitle .entity}}UpdateDB")
+	err = h.{{toTitle .entity}}UpdateDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleUpdateDB %v", err)
+		logger.Errorf("{{toTitle .entity}}UpdateDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID
 	return nil
 }
 
-// ArticleOne defined TODO
-func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq, rsp *helloworld.ArticleOneRes) error {
-	logger.Info("Received ArticleOne request")
+// {{toTitle .entity}}One defined TODO
+func (h *Handler) {{toTitle .entity}}One(ctx context.Context, req *{{.name}}.{{toTitle .entity}}OneReq, rsp *{{.name}}.{{toTitle .entity}}OneRes) error {
+	logger.Info("Received {{toTitle .entity}}One request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleOne")
+	defer marker.Init("{{toTitle .entity}}One")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
@@ -129,29 +129,29 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq,
 	}
 
 	marker.Mark("Copy req")
-	filter, data := types.Article{}, types.Article{}
+	filter, data := types.{{toTitle .entity}}{}, types.{{toTitle .entity}}{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticleOneDB")
-	err = h.ArticleOneDB(ctx, db, &filter, &data)
+	marker.Mark("{{toTitle .entity}}OneDB")
+	err = h.{{toTitle .entity}}OneDB(ctx, db, &filter, &data)
 	if err != nil {
-		logger.Errorf("ArticleOneDB %v", err)
+		logger.Errorf("{{toTitle .entity}}OneDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID
 	return nil
 }
 
-// ArticlePage defined TODO
-func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageReq, rsp *helloworld.ArticlePageRes) error {
-	logger.Info("Received ArticlePage request")
+// {{toTitle .entity}}Page defined TODO
+func (h *Handler) {{toTitle .entity}}Page(ctx context.Context, req *{{.name}}.{{toTitle .entity}}PageReq, rsp *{{.name}}.{{toTitle .entity}}PageRes) error {
+	logger.Info("Received {{toTitle .entity}}Page request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticlePage")
+	defer marker.Init("{{toTitle .entity}}Page")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
@@ -161,17 +161,17 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageRe
 	}
 
 	marker.Mark("Copy req")
-	filter, list := types.Article{}, []types.Article{}
+	filter, list := types.{{toTitle .entity}}{}, []types.{{toTitle .entity}}{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
 		logger.Errorf("Copy %v", err)
 		return err
 	}
 
-	marker.Mark("ArticlePageDB")
+	marker.Mark("{{toTitle .entity}}PageDB")
 	var totalRecord int64
 	var totalPage int64
-	err = h.ArticlePageDB(ctx, db, &filter, &list, &totalRecord)
+	err = h.{{toTitle .entity}}PageDB(ctx, db, &filter, &list, &totalRecord)
 	if err != nil {
 		logger.Errorf("InitDB %v", err)
 		return err

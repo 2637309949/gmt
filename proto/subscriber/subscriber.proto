@@ -2,3 +2,6 @@ syntax = "proto3";
 
 package subscriber;
 
+message Message {
+    int64 id = 1 [json_name = "id"];
+}

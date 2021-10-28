@@ -32,10 +32,10 @@ func isExist(path string) bool {
 
 var initd = &cobra.Command{
 	Use:   "init",
-	Short: "Init a micro collection",
+	Short: "create micro repo",
 	RunE: func(_ *cobra.Command, args []string) error {
 		if len(args) < 1 {
-			return errors.New("please provide the collection name")
+			return errors.New("please provide the repo name")
 		}
 		if isExist(args[0]) {
 			return errors.New("directory already exists")
@@ -45,7 +45,7 @@ var initd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		removeAll(path.Join(args[0], ".git"), path.Join(args[0], "docs"), path.Join(args[0], "README.md"))
+		removeAll(path.Join(args[0], ".git"), path.Join(args[0], "docs"), path.Join(args[0], "aggregate-service"), path.Join(args[0], "publisher-service"), path.Join(args[0], "subscriber-service"), path.Join(args[0], "README.md"))
 		return nil
 	},
 }

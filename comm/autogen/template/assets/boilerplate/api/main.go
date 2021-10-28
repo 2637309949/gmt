@@ -3,7 +3,7 @@ package main
 import (
 	"comm/logger"
 	"comm/micro"
-	"{{.name}}/api/handler"
+	"{{.name}}-service/api/handler"
 	"proto/{{.name}}"
 )
 

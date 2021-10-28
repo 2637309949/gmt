@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package test;
+
+message Entity {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityAddReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityAddRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityDelReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityDelRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityUpdateReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityUpdateRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityOneReq {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityOneRes {
+    int64 id = 1 [json_name = "id"];
+}
+
+message EntityPageReq {
+    int64 page = 1 [json_name = "page"];
+    int64 size = 2 [json_name = "size"];
+}
+
+message EntityPageRes {
+	int64 page = 1 [json_name = "page"];
+	int64 size = 2 [json_name = "size"];
+	int64 total_record = 3 [json_name = "total_record"];
+	int64 total_page = 4 [json_name = "total_page"];
+    repeated Entity data = 5 [json_name = "data"];
+}
+
+

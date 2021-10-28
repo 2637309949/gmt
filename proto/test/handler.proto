@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package test;
+
+import "proto/test/test.proto";
+
+service Test {
+	rpc EntityAdd(EntityAddReq) returns (EntityAddRes) {}
+    rpc EntityDel(EntityDelReq) returns (EntityDelRes) {}
+    rpc EntityUpdate(EntityUpdateReq) returns (EntityUpdateRes) {}
+    rpc EntityOne(EntityOneReq) returns (EntityOneRes) {}
+    rpc EntityPage(EntityPageReq) returns (EntityPageRes) {}
+}

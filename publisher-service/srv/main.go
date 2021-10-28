@@ -2,8 +2,8 @@ package main
 
 import (
 	"proto/publisher"
-	"publisher/srv/handler"
-	srv "publisher/srv/publisher"
+	"publisher-service/srv/handler"
+	srv "publisher-service/srv/publisher"
 
 	"comm/logger"
 	"comm/micro"

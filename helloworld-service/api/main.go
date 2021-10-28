@@ -3,7 +3,7 @@ package main
 import (
 	"comm/logger"
 	"comm/micro"
-	"helloworld/api/handler"
+	"helloworld-service/api/handler"
 	"proto/helloworld"
 )
 

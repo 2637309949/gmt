@@ -3,7 +3,7 @@ package main
 import (
 	"comm/logger"
 	"comm/micro"
-	"subscriber/srv/subscriber"
+	"subscriber-service/srv/subscriber"
 )
 
 func main() {

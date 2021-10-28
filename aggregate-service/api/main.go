@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aggregate/api/handler"
+	"aggregate-service/api/handler"
 	"comm/logger"
 	"comm/micro"
 	"proto/aggregate"

@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"publisher/srv/publisher"
+	"publisher-service/srv/publisher"
 )
 
 type Handler struct {

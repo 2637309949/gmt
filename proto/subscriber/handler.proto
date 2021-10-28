@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package subscriber;
-
-import "proto/subscriber/subscriber.proto";
-
-service Subscriber {
-}

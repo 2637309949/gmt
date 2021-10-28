@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package aggregate;
-
-import "proto/aggregate/aggregate.proto";
-
-service Aggregate {
-    rpc UploadDoc(UploadDocReq) returns (UploadDocRes) {}
-}

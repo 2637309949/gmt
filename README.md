@@ -1,26 +1,26 @@
-### Install gmt
+### Quick start
 
+- Install autogen
 ```shell
 go get -u github.com/2637309949/gmt/comm/autogen
 ```
 
-```
-Code generation tool for go-micro
-
-Usage:
-  autogen [command]
-
-Available Commands:
-  help        Help about any command
-  init        Init a micro collection
-  new         New service
-
-Flags:
-  -h, --help   help for autogen
-
-Use "autogen [command] --help" for more information about a command.
+- Init micro repo
+```shell
+autogen init t5-xk
 ```
 
+- New service
+```shell
+cd t5-xk && autogen new t5-001
+```
+
+```shell
+$ ls --all
+.  ..  comm  helloworld-service  proto  t5-001-service  workspace.code-workspace
+```
+
+### Document
 - [编译环境](./docs/编译环境.md)
 - [安装微服](./docs/安装微服.md)
 - [编译网关](./docs/编译网关.md)

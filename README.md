@@ -1,14 +1,14 @@
 ### Install gmt
 
 ```shell
-go get -u github.com/2637309949/gmt/comm/gmt
+go get -u github.com/2637309949/gmt/comm/autogen
 ```
 
 ```
 Code generation tool for go-micro
 
 Usage:
-  gmt [command]
+  autogen [command]
 
 Available Commands:
   help        Help about any command
@@ -16,9 +16,9 @@ Available Commands:
   new         New service
 
 Flags:
-  -h, --help   help for gmt
+  -h, --help   help for autogen
 
-Use "gmt [command] --help" for more information about a command.
+Use "autogen [command] --help" for more information about a command.
 ```
 
 - [编译环境](./docs/编译环境.md)

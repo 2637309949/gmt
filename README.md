@@ -12,7 +12,7 @@ autogen init t5-xk
 
 - New service
 ```shell
-cd t5-xk && autogen new t5-001
+cd t5-xk && autogen new t5-001 -s "root:gmt@tcp(127.0.0.1:3306)/test" -t "order"
 ```
 
 ```shell

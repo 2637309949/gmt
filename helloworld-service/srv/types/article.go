@@ -10,7 +10,7 @@ import (
 // Article defined 文章
 type Article struct {
 	// ID defined 主键
-	ID int64 `xorm:"bigint64(20) notnull autoincr unique pk comment('主键') 'id'" json:"id" form:"id" xml:"id"`
+	ID uint64 `xorm:"bigint64(20) notnull autoincr unique pk comment('主键') 'id'" json:"id" form:"id" xml:"id"`
 	// UnansweredCount defined 未答复数目
 	UnansweredCount int64 `xorm:"comment('未答复数目') 'unanswered_count'" json:"unanswered_count" form:"unanswered_count" xml:"unanswered_count"`
 	// BestAnswerersCount defined 最佳答复数目

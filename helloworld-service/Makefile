@@ -11,7 +11,7 @@ LDFLAGS=-X $(GIT_IMPORT).GitCommit=$(GIT_COMMIT) -X $(GIT_IMPORT).GitTag=$(GIT_T
 IMAGE_TAG=$(GIT_TAG)-$(GIT_COMMIT)
 GOPATH=$(shell go env GOPATH)
 MODIFY=Mproto/imports/api.proto=github.com/micro/go-micro/v2/api/proto
-FILES= $(wildcard ../proto/helloworld/*.proto)
+FILES=$(wildcard ../proto/helloworld/*.proto)
 
 .PHONY: proto
 proto:

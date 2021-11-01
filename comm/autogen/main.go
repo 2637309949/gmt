@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/2637309949/gmt/comm/autogen/cmd"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
 )
 

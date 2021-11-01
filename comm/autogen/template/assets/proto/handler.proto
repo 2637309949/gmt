@@ -5,9 +5,9 @@ package {{.name}};
 import "proto/{{.name}}/{{.name}}.proto";
 
 service {{toTitle .name}} {
-	rpc {{toTitle .entity}}Add({{toTitle .entity}}AddReq) returns ({{toTitle .entity}}AddRes) {}
-    rpc {{toTitle .entity}}Del({{toTitle .entity}}DelReq) returns ({{toTitle .entity}}DelRes) {}
-    rpc {{toTitle .entity}}Update({{toTitle .entity}}UpdateReq) returns ({{toTitle .entity}}UpdateRes) {}
-    rpc {{toTitle .entity}}One({{toTitle .entity}}OneReq) returns ({{toTitle .entity}}OneRes) {}
-    rpc {{toTitle .entity}}Page({{toTitle .entity}}PageReq) returns ({{toTitle .entity}}PageRes) {}
+	rpc {{toTitle .proto.Name}}Add({{toTitle .proto.Name}}AddReq) returns ({{toTitle .proto.Name}}AddRes) {}
+    rpc {{toTitle .proto.Name}}Del({{toTitle .proto.Name}}DelReq) returns ({{toTitle .proto.Name}}DelRes) {}
+    rpc {{toTitle .proto.Name}}Update({{toTitle .proto.Name}}UpdateReq) returns ({{toTitle .proto.Name}}UpdateRes) {}
+    rpc {{toTitle .proto.Name}}One({{toTitle .proto.Name}}OneReq) returns ({{toTitle .proto.Name}}OneRes) {}
+    rpc {{toTitle .proto.Name}}Page({{toTitle .proto.Name}}PageReq) returns ({{toTitle .proto.Name}}PageRes) {}
 }

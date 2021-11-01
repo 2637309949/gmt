@@ -4,42 +4,41 @@ import (
 	"comm/logger"
 	"context"
 	"{{.name}}-service/srv/types"
-	"time"
 
 	"github.com/xormplus/xorm"
 )
 
-// {{toTitle .entity}}AddDB defined TODO
-func (h *Handler) {{toTitle .entity}}AddDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .entity}}) error {
-	logger.Info("Received {{toTitle .entity}}AddDB request")
+// {{toTitle .proto.Name}}AddDB defined TODO
+func (h *Handler) {{toTitle .proto.Name}}AddDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .proto.Name}}) error {
+	logger.Info("Received {{toTitle .proto.Name}}AddDB request")
 
-	item.CreateTime = time.Now()
+	// item.CreateTime = time.Now()
 	ret, err := db.Insert(item)
 	if err != nil {
 		return err
 	}
-	item.ID = ret
+	item.ID = uint64(ret)
 	return err
 }
 
-// {{toTitle .entity}}DelDB defined TODO
-func (h *Handler) {{toTitle .entity}}DelDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .entity}}) error {
-	logger.Info("Received {{toTitle .entity}}DelDB request")
+// {{toTitle .proto.Name}}DelDB defined TODO
+func (h *Handler) {{toTitle .proto.Name}}DelDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}) error {
+	logger.Info("Received {{toTitle .proto.Name}}DelDB request")
 
-	ret, err := db.ID(where.ID).Update(&types.{{toTitle .entity}}{
-		UpdateTime: time.Now(),
-		IsDelete:   1,
+	ret, err := db.ID(where.ID).Update(&types.{{toTitle .proto.Name}}{
+		// UpdateTime: time.Now(),
+		// IsDelete:   1,
 	})
 	if err != nil {
 		return err
 	}
-	where.ID = ret
+	where.ID = uint64(ret)
 	return err
 }
 
-// {{toTitle .entity}}UpdateDB defined TODO
-func (h *Handler) {{toTitle .entity}}UpdateDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .entity}}) error {
-	logger.Info("Received {{toTitle .entity}}UpdateDB request")
+// {{toTitle .proto.Name}}UpdateDB defined TODO
+func (h *Handler) {{toTitle .proto.Name}}UpdateDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .proto.Name}}) error {
+	logger.Info("Received {{toTitle .proto.Name}}UpdateDB request")
 
 	_, err := db.ID(item.ID).Update(item)
 	if err != nil {
@@ -48,9 +47,9 @@ func (h *Handler) {{toTitle .entity}}UpdateDB(ctx context.Context, db *xorm.Engi
 	return err
 }
 
-// {{toTitle .entity}}OneDB defined TODO
-func (h *Handler) {{toTitle .entity}}OneDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .entity}}, item *types.{{toTitle .entity}}) error {
-	logger.Info("Received {{toTitle .entity}}OneDB request")
+// {{toTitle .proto.Name}}OneDB defined TODO
+func (h *Handler) {{toTitle .proto.Name}}OneDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}, item *types.{{toTitle .proto.Name}}) error {
+	logger.Info("Received {{toTitle .proto.Name}}OneDB request")
 
 	ext, err := db.Get(item)
 	if err != nil {
@@ -62,9 +61,9 @@ func (h *Handler) {{toTitle .entity}}OneDB(ctx context.Context, db *xorm.Engine,
 	return err
 }
 
-// {{toTitle .entity}}PageDB defined TODO
-func (h *Handler) {{toTitle .entity}}PageDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .entity}}, list *[]types.{{toTitle .entity}}, totalRecord ...*int64) error {
-	logger.Info("Received {{toTitle .entity}}PageDB request")
+// {{toTitle .proto.Name}}PageDB defined TODO
+func (h *Handler) {{toTitle .proto.Name}}PageDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}, list *[]types.{{toTitle .proto.Name}}, totalRecord ...*uint64) error {
+	logger.Info("Received {{toTitle .proto.Name}}PageDB request")
 
 	err := db.Find(list, where)
 	if err != nil {
@@ -75,7 +74,7 @@ func (h *Handler) {{toTitle .entity}}PageDB(ctx context.Context, db *xorm.Engine
 		if err != nil {
 			return err
 		}
-		*totalRecord[0] = ct
+		*totalRecord[0] = uint64(ct)
 	}
 	return nil
 }

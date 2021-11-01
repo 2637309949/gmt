@@ -2,53 +2,65 @@ syntax = "proto3";
 
 package {{.name}};
 
-message {{toTitle .entity}} {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}} {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}AddReq {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}AddReq {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}AddRes {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}AddRes {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}DelReq {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}DelReq {
+    uint64 id = 1 [json_name = "id"];
 }
 
-message {{toTitle .entity}}DelRes {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}DelRes {
+    uint64 id = 1 [json_name = "id"];
 }
 
-message {{toTitle .entity}}UpdateReq {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}UpdateReq {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}UpdateRes {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}UpdateRes {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}OneReq {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}OneReq {
+    uint64 id = 1 [json_name = "id"];
 }
 
-message {{toTitle .entity}}OneRes {
-    int64 id = 1 [json_name = "id"];
+message {{toTitle .proto.Name}}OneRes {
+    {{- range $i, $v := .proto.Fields}}
+	{{.Type}} {{$v.Name}} = {{.Index $i}} {{$v.Options}};
+	{{- end}}
 }
 
-message {{toTitle .entity}}PageReq {
-    int64 page = 1 [json_name = "page"];
-    int64 size = 2 [json_name = "size"];
+message {{toTitle .proto.Name}}PageReq {
+    uint64 page = 1 [json_name = "page"];
+    uint64 size = 2 [json_name = "size"];
 }
 
-message {{toTitle .entity}}PageRes {
-	int64 page = 1 [json_name = "page"];
-	int64 size = 2 [json_name = "size"];
-	int64 total_record = 3 [json_name = "total_record"];
-	int64 total_page = 4 [json_name = "total_page"];
-    repeated {{toTitle .entity}} data = 5 [json_name = "data"];
+message {{toTitle .proto.Name}}PageRes {
+	uint64 page = 1 [json_name = "page"];
+	uint64 size = 2 [json_name = "size"];
+	uint64 total_record = 3 [json_name = "total_record"];
+	uint64 total_page = 4 [json_name = "total_page"];
+    repeated {{toTitle .proto.Name}} data = 5 [json_name = "data"];
 }
 
 

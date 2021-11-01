@@ -5,13 +5,40 @@ import (
 	"unicode"
 )
 
+var (
+	commonInitialisms                  = []string{"API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "LHS", "QPS", "RAM", "RHS", "RPC", "SLA", "SMTP", "SSH", "TLS", "TTL", "UID", "UI", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XSRF", "XSS"}
+	commonInitialismsUpperCaseReplacer = toUpperCaseReplacer(commonInitialisms)
+	commonInitialismsLowerCaseReplacer = toLowerCaseReplacer(commonInitialisms)
+	_                                  = commonInitialismsLowerCaseReplacer
+	_                                  = commonInitialismsUpperCaseReplacer
+)
+
 var uppercaseAcronym = map[string]string{
 	"ID": "id",
+}
+
+func toUpperCaseReplacer(sms []string) *strings.Replacer {
+	var list []string
+	for _, initialism := range sms {
+		list = append(list, strings.ToLower(initialism), initialism)
+	}
+	replacer := strings.NewReplacer(list...)
+	return replacer
+}
+
+func toLowerCaseReplacer(sms []string) *strings.Replacer {
+	var list []string
+	for _, initialism := range sms {
+		list = append(list, initialism, strings.ToLower(initialism))
+	}
+	replacer := strings.NewReplacer(list...)
+	return replacer
 }
 
 // Camel2Case defined TODO
 func Camel2Case(name string) string {
 	buffer := NewBuffer()
+
 	for i, r := range name {
 		if unicode.IsUpper(r) {
 			if i != 0 {
@@ -68,5 +95,8 @@ func Case2Camel(s string) string {
 
 // ToTitle defined TODO
 func ToTitle(t string) string {
-	return strings.Title(Camel2Case(t))
+	if rt := commonInitialismsUpperCaseReplacer.Replace(t); rt != t {
+		return rt
+	}
+	return strings.Title(Case2Camel(t))
 }

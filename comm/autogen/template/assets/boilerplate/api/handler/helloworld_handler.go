@@ -10,66 +10,66 @@ import (
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
-var _ = {{.name}}.{{toTitle .entity}}{}
+var _ = {{.name}}.{{toTitle .proto.Name}}{}
 var _ = api.Request{}
 var _ = logger.Info
 
-func (h *Handler) {{toTitle .entity}}Add(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received {{toTitle .entity}}Add request")
+func (h *Handler) {{toTitle .proto.Name}}Add(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .proto.Name}}Add request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.{{toTitle .entity}}AddReq{}
+	r := {{.name}}.{{toTitle .proto.Name}}AddReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Add(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .proto.Name}}Add(ctx, &r))
 }
 
-func (h *Handler) {{toTitle .entity}}Del(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received {{toTitle .entity}}Del request")
+func (h *Handler) {{toTitle .proto.Name}}Del(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .proto.Name}}Del request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.{{toTitle .entity}}DelReq{}
+	r := {{.name}}.{{toTitle .proto.Name}}DelReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Del(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .proto.Name}}Del(ctx, &r))
 }
 
-func (h *Handler) {{toTitle .entity}}Update(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received {{toTitle .entity}}Update request")
+func (h *Handler) {{toTitle .proto.Name}}Update(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .proto.Name}}Update request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.{{toTitle .entity}}UpdateReq{}
+	r := {{.name}}.{{toTitle .proto.Name}}UpdateReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Update(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .proto.Name}}Update(ctx, &r))
 }
 
-func (h *Handler) {{toTitle .entity}}One(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received {{toTitle .entity}}One request")
+func (h *Handler) {{toTitle .proto.Name}}One(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .proto.Name}}One request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.{{toTitle .entity}}OneReq{}
+	r := {{.name}}.{{toTitle .proto.Name}}OneReq{}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}One(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .proto.Name}}One(ctx, &r))
 }
 
-func (h *Handler) {{toTitle .entity}}Page(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	logger.Info("Received {{toTitle .entity}}Page request")
+func (h *Handler) {{toTitle .proto.Name}}Page(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	logger.Info("Received {{toTitle .proto.Name}}Page request")
 
 	request, response := api.NewRequest(req), api.NewResponse(rsp)
-	r := {{.name}}.{{toTitle .entity}}PageReq{Page: 1, Size: 20}
+	r := {{.name}}.{{toTitle .proto.Name}}PageReq{Page: 1, Size: 20}
 	if err := request.Bind(&r); err != nil {
 		logger.Infof("Request.Bind error %v", err)
 		return err
 	}
-	return response.Build(h.{{toTitle .name}}Service.{{toTitle .entity}}Page(ctx, &r))
+	return response.Build(h.{{toTitle .name}}Service.{{toTitle .proto.Name}}Page(ctx, &r))
 }

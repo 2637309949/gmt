@@ -18,7 +18,7 @@ func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, item *types
 	if err != nil {
 		return err
 	}
-	item.ID = ret
+	item.ID = uint64(ret)
 	return err
 }
 
@@ -33,7 +33,7 @@ func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, where *type
 	if err != nil {
 		return err
 	}
-	where.ID = ret
+	where.ID = uint64(ret)
 	return err
 }
 

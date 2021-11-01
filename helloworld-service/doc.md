@@ -68,7 +68,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -91,7 +91,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -114,7 +114,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -137,7 +137,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -160,7 +160,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -183,7 +183,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -206,7 +206,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -229,7 +229,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -255,7 +255,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page | [int64](#int64) |  |  |
+| page | [uint64](#uint64) |  |  |
 | size | [int64](#int64) |  |  |
 | total_record | [int64](#int64) |  |  |
 | total_page | [int64](#int64) |  |  |
@@ -274,7 +274,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |
@@ -297,7 +297,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [int64](#int64) |  |  |
+| id | [uint64](#uint64) |  |  |
 | creater | [int64](#int64) |  |  |
 | create_time | [string](#string) |  |  |
 | updater | [int64](#int64) |  |  |

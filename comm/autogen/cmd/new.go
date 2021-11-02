@@ -198,7 +198,7 @@ var new = &cobra.Command{
 			return errors.New("please provide service name")
 		}
 		name := args[0]
-
+		name = strings.ReplaceAll(name, "-", "_")
 		if isExist(name) {
 			return fmt.Errorf("directory already exists %v", name)
 		}

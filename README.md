@@ -12,12 +12,29 @@ autogen init t5-xk
 
 - New service
 ```shell
-cd t5-xk && autogen new t5-001 -s "root:gmt@tcp(127.0.0.1:3306)/test" -t "order"
+$ cd t5-xk && autogen new t5-001 -s "root:gmt@tcp(127.0.0.1:3306)/test" -t "order"
 ```
 
 ```shell
-$ ls --all
-.  ..  comm  helloworld-service  proto  t5-001-service  workspace.code-workspace
+$ cd t5-001 && tree
+├── api
+│   ├── Dockerfile
+│   ├── handler
+│   │   ├── handler.go
+│   │   └── t5-001_handler.go
+│   └── main.go
+├── doc.md
+├── go.mod
+├── Makefile
+└── srv
+    ├── Dockerfile
+    ├── handler
+    │   ├── handler.go
+    │   ├── t5-001_dbhandler.go
+    │   └── t5-001_handler.go
+    ├── main.go
+    └── types
+        └── article.go
 ```
 
 ### Document

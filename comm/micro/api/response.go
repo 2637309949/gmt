@@ -4,8 +4,12 @@ import (
 	"comm/errors"
 	"context"
 	"encoding/json"
+	"fmt"
+	"strings"
 
 	go_api "github.com/micro/go-micro/v2/api/proto"
+	"github.com/opentracing/opentracing-go"
+	"github.com/uber/jaeger-client-go"
 )
 
 // Response defined TODO
@@ -21,6 +25,12 @@ type Message interface {
 }
 
 func (r *Response) Build(ctx context.Context, data Message, err error) string {
+	otCtx := opentracing.SpanFromContext(ctx)
+	if spanCtx, ok := otCtx.Context().(jaeger.SpanContext); ok {
+		defer func() {
+			r.Body = strings.Replace(r.Body, "{", "{\"request_id\": \""+fmt.Sprintf("%v", spanCtx.TraceID())+"\", ", 1)
+		}()
+	}
 	r.StatusCode = 200
 	if err != nil {
 		r.Body = errors.Format(err)

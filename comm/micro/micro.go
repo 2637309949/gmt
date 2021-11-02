@@ -98,13 +98,13 @@ func NewJaegerTracer(serviceName string, addr string) (opentracing.Tracer, io.Cl
 
 // NewService creates and returns a new Service based on the packages within.
 func NewService(opts ...micro.Option) micro.Service {
-	ctx := context.Background()
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
 	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
 	opentracingAddress := conf.Load("comm", "opentracing_address").String("127.0.0.1:6831")
 	jaegerTracer, _, _ := NewJaegerTracer(NameFormat(GetServiceName()), opentracingAddress)
 	hystrix.DefaultSleepWindow = 200
 	hystrix.DefaultMaxConcurrent = 3
+	ctx := context.Background()
 
 	logger.Infof(ctx, "registry_address:%v", registryAddress)
 	logger.Infof(ctx, "broker_address:%v", brokerAddress)

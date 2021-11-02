@@ -28,7 +28,7 @@ func init() {
 		Level:           logrus.PanicLevel,
 		Fields:          make(map[string]interface{}),
 		Out:             os.Stderr,
-		CallerSkipCount: 2,
+		CallerSkipCount: 3,
 		Context:         context.Background(),
 	}
 	l := &defaultLogger{opts: options, hooks: make(LevelHooks)}
@@ -57,13 +57,6 @@ func (hooks LevelHooks) Fire(level logrus.Level, t string, m interface{}, fields
 	}
 
 	return nil
-}
-
-type graylogEntry struct {
-	l      logrus.Level
-	t      string
-	m      interface{}
-	fields map[string]interface{}
 }
 
 type defaultLogger struct {

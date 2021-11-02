@@ -11,7 +11,7 @@ message Article {
     uint32 is_delete = 6 [json_name = "-"];
     string remark = 7 [json_name = "remark"];
     string name = 8 [json_name = "name"];
-    string x_user = 9 [json_name = "x_user"];
+    string x_user = 9 [json_name = "-"];
 }
 
 message ArticleAddReq {

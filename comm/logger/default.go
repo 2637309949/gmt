@@ -25,7 +25,7 @@ func init() {
 	logger.Infof("graylog_address:%v", graylogAddress)
 
 	options := Options{
-		Level:           logrus.InfoLevel,
+		Level:           logrus.PanicLevel,
 		Fields:          make(map[string]interface{}),
 		Out:             os.Stderr,
 		CallerSkipCount: 2,

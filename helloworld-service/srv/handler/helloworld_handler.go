@@ -12,10 +12,6 @@ import (
 	"proto/helloworld"
 )
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ = helloworld.Article{}
-var _ = logger.Info
-
 // ArticleAdd defined TODO
 func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq, rsp *helloworld.ArticleAddRes) error {
 	logger.Info("Received ArticleAdd request")

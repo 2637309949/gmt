@@ -2,7 +2,6 @@ package subscriber
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/micro/go-micro/v2/server"
 )
@@ -15,8 +14,6 @@ func subscriberCall(next server.SubscriberFunc) server.SubscriberFunc {
 
 func call(fn server.HandlerFunc) server.HandlerFunc {
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
-		fmt.Println("--------------1")
-		defer fmt.Println("--------------2")
 		return fn(ctx, req, rsp)
 	}
 }

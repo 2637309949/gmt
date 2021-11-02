@@ -21,19 +21,20 @@ func (r *Request) Bind(i interface{}) error {
 	if err != nil {
 		return err
 	}
-	iv := reflect.ValueOf(i)
-	iv = reflect.Indirect(iv)
+	iv := reflect.ValueOf(i).Elem()
 	xi := iv.FieldByName("XUser")
-	if xi.CanSet() && xi.IsValid() && xi.Type().Kind() == reflect.String {
-		xUser, _ := r.Get("X-User")
-		xi.Set(reflect.ValueOf(xUser))
+	if xi.CanSet() && xi.IsValid() && (xi.Type().Kind() == reflect.String) {
+		xUser, ok := r.Get("X-User")
+		if ok {
+			xi.Set(reflect.ValueOf(xUser))
+		}
 	}
 	for k, v := range r.Keys {
 		if k == "X-User" {
 			continue
 		}
 		xi := iv.FieldByName(k)
-		if xi.CanSet() && xi.IsValid() && xi.IsZero() && xi.Type().Kind() == reflect.TypeOf(v).Kind() {
+		if xi.CanSet() && xi.IsValid() && xi.IsZero() && (xi.Type().Kind() == reflect.TypeOf(v).Kind()) {
 			xi.Set(reflect.ValueOf(v))
 		}
 	}

@@ -11,7 +11,7 @@ import (
 
 // ArticleAddDB defined TODO
 func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, item *types.Article) error {
-	logger.Info("Received ArticleAddDB request")
+	logger.Info(ctx, "Received ArticleAddDB request")
 
 	item.CreateTime = time.Now()
 	ret, err := db.Insert(item)
@@ -24,7 +24,7 @@ func (h *Handler) ArticleAddDB(ctx context.Context, db *xorm.Engine, item *types
 
 // ArticleDelDB defined TODO
 func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, where *types.Article) error {
-	logger.Info("Received ArticleDelDB request")
+	logger.Info(ctx, "Received ArticleDelDB request")
 
 	ret, err := db.ID(where.ID).Update(&types.Article{
 		UpdateTime: time.Now(),
@@ -39,7 +39,7 @@ func (h *Handler) ArticleDelDB(ctx context.Context, db *xorm.Engine, where *type
 
 // ArticleUpdateDB defined TODO
 func (h *Handler) ArticleUpdateDB(ctx context.Context, db *xorm.Engine, item *types.Article) error {
-	logger.Info("Received ArticleUpdateDB request")
+	logger.Info(ctx, "Received ArticleUpdateDB request")
 
 	_, err := db.ID(item.ID).Update(item)
 	if err != nil {
@@ -50,7 +50,7 @@ func (h *Handler) ArticleUpdateDB(ctx context.Context, db *xorm.Engine, item *ty
 
 // ArticleOneDB defined TODO
 func (h *Handler) ArticleOneDB(ctx context.Context, db *xorm.Engine, where *types.Article, item *types.Article) error {
-	logger.Info("Received ArticleOneDB request")
+	logger.Info(ctx, "Received ArticleOneDB request")
 
 	ext, err := db.Get(item)
 	if err != nil {
@@ -64,7 +64,7 @@ func (h *Handler) ArticleOneDB(ctx context.Context, db *xorm.Engine, where *type
 
 // ArticlePageDB defined TODO
 func (h *Handler) ArticlePageDB(ctx context.Context, db *xorm.Engine, where *types.Article, list *[]types.Article, totalRecord ...*int64) error {
-	logger.Info("Received ArticlePageDB request")
+	logger.Info(ctx, "Received ArticlePageDB request")
 
 	err := db.Find(list, where)
 	if err != nil {

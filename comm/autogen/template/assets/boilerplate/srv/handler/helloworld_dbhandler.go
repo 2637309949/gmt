@@ -10,7 +10,7 @@ import (
 
 // {{toTitle .proto.Name}}AddDB defined TODO
 func (h *Handler) {{toTitle .proto.Name}}AddDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .proto.Name}}) error {
-	logger.Info("Received {{toTitle .proto.Name}}AddDB request")
+	logger.Info(ctx, "Received {{toTitle .proto.Name}}AddDB request")
 
 	// item.CreateTime = time.Now()
 	ret, err := db.Insert(item)
@@ -23,7 +23,7 @@ func (h *Handler) {{toTitle .proto.Name}}AddDB(ctx context.Context, db *xorm.Eng
 
 // {{toTitle .proto.Name}}DelDB defined TODO
 func (h *Handler) {{toTitle .proto.Name}}DelDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}) error {
-	logger.Info("Received {{toTitle .proto.Name}}DelDB request")
+	logger.Info(ctx, "Received {{toTitle .proto.Name}}DelDB request")
 
 	ret, err := db.ID(where.ID).Update(&types.{{toTitle .proto.Name}}{
 		// UpdateTime: time.Now(),
@@ -38,7 +38,7 @@ func (h *Handler) {{toTitle .proto.Name}}DelDB(ctx context.Context, db *xorm.Eng
 
 // {{toTitle .proto.Name}}UpdateDB defined TODO
 func (h *Handler) {{toTitle .proto.Name}}UpdateDB(ctx context.Context, db *xorm.Engine, item *types.{{toTitle .proto.Name}}) error {
-	logger.Info("Received {{toTitle .proto.Name}}UpdateDB request")
+	logger.Info(ctx, "Received {{toTitle .proto.Name}}UpdateDB request")
 
 	_, err := db.ID(item.ID).Update(item)
 	if err != nil {
@@ -49,7 +49,7 @@ func (h *Handler) {{toTitle .proto.Name}}UpdateDB(ctx context.Context, db *xorm.
 
 // {{toTitle .proto.Name}}OneDB defined TODO
 func (h *Handler) {{toTitle .proto.Name}}OneDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}, item *types.{{toTitle .proto.Name}}) error {
-	logger.Info("Received {{toTitle .proto.Name}}OneDB request")
+	logger.Info(ctx, "Received {{toTitle .proto.Name}}OneDB request")
 
 	ext, err := db.Get(item)
 	if err != nil {
@@ -63,7 +63,7 @@ func (h *Handler) {{toTitle .proto.Name}}OneDB(ctx context.Context, db *xorm.Eng
 
 // {{toTitle .proto.Name}}PageDB defined TODO
 func (h *Handler) {{toTitle .proto.Name}}PageDB(ctx context.Context, db *xorm.Engine, where *types.{{toTitle .proto.Name}}, list *[]types.{{toTitle .proto.Name}}, totalRecord ...*uint64) error {
-	logger.Info("Received {{toTitle .proto.Name}}PageDB request")
+	logger.Info(ctx, "Received {{toTitle .proto.Name}}PageDB request")
 
 	err := db.Find(list, where)
 	if err != nil {

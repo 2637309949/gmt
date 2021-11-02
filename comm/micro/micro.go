@@ -4,6 +4,7 @@ import (
 	"comm/conf"
 	"comm/logger"
 	"comm/micro/subscriber"
+	"context"
 	"fmt"
 	"io"
 	"strings"
@@ -97,6 +98,7 @@ func NewJaegerTracer(serviceName string, addr string) (opentracing.Tracer, io.Cl
 
 // NewService creates and returns a new Service based on the packages within.
 func NewService(opts ...micro.Option) micro.Service {
+	ctx := context.Background()
 	registryAddress := conf.Load("comm", "registry_address").String("127.0.0.1:8500")
 	brokerAddress := conf.Load("comm", "broker_address").String("127.0.0.1:4222")
 	opentracingAddress := conf.Load("comm", "opentracing_address").String("127.0.0.1:6831")
@@ -104,9 +106,9 @@ func NewService(opts ...micro.Option) micro.Service {
 	hystrix.DefaultSleepWindow = 200
 	hystrix.DefaultMaxConcurrent = 3
 
-	logger.Infof("registry_address:%v", registryAddress)
-	logger.Infof("broker_address:%v", brokerAddress)
-	logger.Infof("opentracing_address:%v", opentracingAddress)
+	logger.Infof(ctx, "registry_address:%v", registryAddress)
+	logger.Infof(ctx, "broker_address:%v", brokerAddress)
+	logger.Infof(ctx, "opentracing_address:%v", opentracingAddress)
 
 	opts = append(opts, micro.Version("latest"))
 	opts = append(opts, micro.Transport(grpc.NewTransport()))
@@ -130,7 +132,7 @@ func NewService(opts ...micro.Option) micro.Service {
 		metrics.Handle("/metrics", promhttp.Handler())
 		go func() {
 			if err := metrics.Run(); err != nil {
-				logger.Fatalf("failed to serve: %v", err)
+				logger.Fatalf(ctx, "failed to serve: %v", err)
 			}
 		}()
 	}()

@@ -2,6 +2,7 @@ package timer
 
 import (
 	"comm/logger"
+	"context"
 	"time"
 )
 
@@ -11,7 +12,7 @@ type Marker struct {
 }
 
 // NewMark defiend TODO
-func NewMark()  *Marker {
+func NewMark() *Marker {
 	return &Marker{tm: map[string]time.Time{}}
 }
 
@@ -21,9 +22,9 @@ func (m *Marker) Mark(name string) {
 }
 
 // Init defined TODO
-func (m *Marker) Init(name string) {
-	logger.Infof("Starting %v timer", name)
+func (m *Marker) Init(ctx context.Context, name string) {
+	logger.Infof(ctx, "Starting %v timer", name)
 	for k := range m.tm {
-		logger.Infof("%v latency %v", k, time.Since(m.tm[k]).String())
+		logger.Infof(ctx, "%v latency %v", k, time.Since(m.tm[k]).String())
 	}
 }

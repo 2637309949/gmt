@@ -2,6 +2,7 @@
 package logger
 
 import (
+	"context"
 	"io"
 	"os"
 
@@ -32,11 +33,11 @@ func Fields(fields map[string]interface{}) Logger {
 	return DefaultLogger.Fields(fields)
 }
 
-func Log(level logrus.Level, v ...interface{}) {
+func Log(ctx context.Context, level logrus.Level, v ...interface{}) {
 	DefaultLogger.Log(level, v...)
 }
 
-func Logf(level logrus.Level, format string, v ...interface{}) {
+func Logf(ctx context.Context, level logrus.Level, format string, v ...interface{}) {
 	DefaultLogger.Logf(level, format, v...)
 }
 
@@ -48,52 +49,52 @@ func Out() io.Writer {
 	return DefaultLogger.Options().Out
 }
 
-func Info(args ...interface{}) {
-	Log(logrus.InfoLevel, args...)
+func Info(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.InfoLevel, args...)
 }
 
-func Infof(template string, args ...interface{}) {
-	Logf(logrus.InfoLevel, template, args...)
+func Infof(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.InfoLevel, template, args...)
 }
 
-func Trace(args ...interface{}) {
-	Log(logrus.TraceLevel, args...)
+func Trace(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.TraceLevel, args...)
 }
 
-func Tracef(template string, args ...interface{}) {
-	Logf(logrus.TraceLevel, template, args...)
+func Tracef(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.TraceLevel, template, args...)
 }
 
-func Debug(args ...interface{}) {
-	Log(logrus.DebugLevel, args...)
+func Debug(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.DebugLevel, args...)
 }
 
-func Debugf(template string, args ...interface{}) {
-	Logf(logrus.DebugLevel, template, args...)
+func Debugf(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.DebugLevel, template, args...)
 }
 
-func Warn(args ...interface{}) {
-	Log(logrus.WarnLevel, args...)
+func Warn(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.WarnLevel, args...)
 }
 
-func Warnf(template string, args ...interface{}) {
-	Logf(logrus.WarnLevel, template, args...)
+func Warnf(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.WarnLevel, template, args...)
 }
 
-func Error(args ...interface{}) {
-	Log(logrus.ErrorLevel, args...)
+func Error(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.ErrorLevel, args...)
 }
 
-func Errorf(template string, args ...interface{}) {
-	Logf(logrus.ErrorLevel, template, args...)
+func Errorf(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.ErrorLevel, template, args...)
 }
 
-func Fatal(args ...interface{}) {
-	Log(logrus.FatalLevel, args...)
+func Fatal(ctx context.Context, args ...interface{}) {
+	Log(ctx, logrus.FatalLevel, args...)
 	os.Exit(1)
 }
 
-func Fatalf(template string, args ...interface{}) {
-	Logf(logrus.FatalLevel, template, args...)
+func Fatalf(ctx context.Context, template string, args ...interface{}) {
+	Logf(ctx, logrus.FatalLevel, template, args...)
 	os.Exit(1)
 }

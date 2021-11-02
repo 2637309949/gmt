@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"helloworld-service/srv/handler"
 	"proto/helloworld"
 
@@ -9,9 +10,9 @@ import (
 )
 
 func main() {
-	app := micro.NewServiceWithName(micro.NameFormat("srv.helloworld"))
+	app, ctx := micro.NewServiceWithName(micro.NameFormat("srv.helloworld")), context.Background()
 	helloworld.RegisterHelloworldHandler(app.Server(), &handler.Handler{})
 	if err := app.Run(); err != nil {
-		logger.Fatal(err)
+		logger.Fatal(ctx, err)
 	}
 }

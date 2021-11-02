@@ -14,15 +14,15 @@ import (
 
 // ArticleAdd defined TODO
 func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq, rsp *helloworld.ArticleAddRes) error {
-	logger.Info("Received ArticleAdd request")
+	logger.Info(ctx, "Received ArticleAdd request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleAdd")
+	defer marker.Init(ctx, "ArticleAdd")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -30,7 +30,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq,
 	data := types.Article{}
 	err = deep.Copy(&data, req)
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 
@@ -39,7 +39,7 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq,
 	data.UpdateTime = time.Now()
 	err = h.ArticleAddDB(ctx, db, &data)
 	if err != nil {
-		logger.Errorf("ArticleAddDB %v", err)
+		logger.Errorf(ctx, "ArticleAddDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID
@@ -48,15 +48,15 @@ func (h *Handler) ArticleAdd(ctx context.Context, req *helloworld.ArticleAddReq,
 
 // ArticleDel defined TODO
 func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq, rsp *helloworld.ArticleDelRes) error {
-	logger.Info("Received ArticleDel request")
+	logger.Info(ctx, "Received ArticleDel request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleDel")
+	defer marker.Init(ctx, "ArticleDel")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -64,14 +64,14 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq,
 	filter := types.Article{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 
 	marker.Mark("ArticleDelDB")
 	err = h.ArticleDelDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleDelDB %v", err)
+		logger.Errorf(ctx, "ArticleDelDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID
@@ -80,15 +80,15 @@ func (h *Handler) ArticleDel(ctx context.Context, req *helloworld.ArticleDelReq,
 
 // ArticleUpdate defined TODO
 func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpdateReq, rsp *helloworld.ArticleUpdateRes) error {
-	logger.Info("Received ArticleUpdate request")
+	logger.Info(ctx, "Received ArticleUpdate request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleUpdate")
+	defer marker.Init(ctx, "ArticleUpdate")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -96,14 +96,14 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpda
 	filter := types.Article{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 
 	marker.Mark("ArticleUpdateDB")
 	err = h.ArticleUpdateDB(ctx, db, &filter)
 	if err != nil {
-		logger.Errorf("ArticleUpdateDB %v", err)
+		logger.Errorf(ctx, "ArticleUpdateDB %v", err)
 		return err
 	}
 	rsp.Id = filter.ID
@@ -112,15 +112,15 @@ func (h *Handler) ArticleUpdate(ctx context.Context, req *helloworld.ArticleUpda
 
 // ArticleOne defined TODO
 func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq, rsp *helloworld.ArticleOneRes) error {
-	logger.Info("Received ArticleOne request")
+	logger.Info(ctx, "Received ArticleOne request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticleOne")
+	defer marker.Init(ctx, "ArticleOne")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -128,14 +128,14 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq,
 	filter, data := types.Article{}, types.Article{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 
 	marker.Mark("ArticleOneDB")
 	err = h.ArticleOneDB(ctx, db, &filter, &data)
 	if err != nil {
-		logger.Errorf("ArticleOneDB %v", err)
+		logger.Errorf(ctx, "ArticleOneDB %v", err)
 		return err
 	}
 	rsp.Id = data.ID
@@ -144,15 +144,15 @@ func (h *Handler) ArticleOne(ctx context.Context, req *helloworld.ArticleOneReq,
 
 // ArticlePage defined TODO
 func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageReq, rsp *helloworld.ArticlePageRes) error {
-	logger.Info("Received ArticlePage request")
+	logger.Info(ctx, "Received ArticlePage request")
 
 	marker := timer.NewMark()
-	defer marker.Init("ArticlePage")
+	defer marker.Init(ctx, "ArticlePage")
 
 	marker.Mark("data_source")
 	db, err := mysql.InitDB("data_source")
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -160,7 +160,7 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageRe
 	filter, list := types.Article{}, []types.Article{}
 	err = deep.Copy(&filter, req)
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 
@@ -169,7 +169,7 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageRe
 	var totalPage int64
 	err = h.ArticlePageDB(ctx, db, &filter, &list, &totalRecord)
 	if err != nil {
-		logger.Errorf("InitDB %v", err)
+		logger.Errorf(ctx, "InitDB %v", err)
 		return err
 	}
 
@@ -187,7 +187,7 @@ func (h *Handler) ArticlePage(ctx context.Context, req *helloworld.ArticlePageRe
 	rsp.TotalPage = totalPage
 	rsp.Size = req.Size
 	if err != nil {
-		logger.Errorf("Copy %v", err)
+		logger.Errorf(ctx, "Copy %v", err)
 		return err
 	}
 	return nil

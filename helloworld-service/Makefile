@@ -15,8 +15,13 @@ FILES=$(wildcard ../proto/helloworld/*.proto)
 
 .PHONY: proto
 proto:
-	protoc --proto_path=../ --micro_out=${MODIFY}:../ --go_out=${MODIFY}:../ --doc_out=markdown,doc.md:./ ${FILES}
+	@for file in $(FILES); do \
+		echo -e "protoc --proto_path=../ --micro_out=${MODIFY}:../ $$file;" && \
+		protoc --proto_path=../ --micro_out=../ --go_out=${MODIFY}:../ $$file; \
+	done
+	protoc --proto_path=../ --doc_out=markdown,doc.md:./ ${FILES};
 	sed -i -e 's/,omitempty//g' ../proto/helloworld/*.go
+
 .PHONY: build
 build:
 	go build -a -installsuffix cgo -ldflags "-w ${LDFLAGS}" -o api.$(shell echo $(NAME) | sed -e "s/-service//g") api/*.go

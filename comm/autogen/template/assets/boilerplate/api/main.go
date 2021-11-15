@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	app, ctx := micro.NewServiceWithName(micro.NameFormat("api.{{.name}}")), context.Background()
+	ctx := context.Background()
+	app := micro.NewServiceWithName(micro.NameFormat("api.{{.name}}"))
 	micro.RegisterHandler(app.Server(), &handler.Handler{
 		{{toTitle .name}}Service: {{.name}}.New{{toTitle .name}}Service(micro.NameFormat("srv.{{.name}}"), app.Client()),
 	})

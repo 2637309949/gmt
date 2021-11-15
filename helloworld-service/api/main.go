@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	app, ctx := micro.NewServiceWithName(micro.NameFormat("api.helloworld")), context.Background()
+	ctx := context.Background()
+	app := micro.NewServiceWithName(micro.NameFormat("api.helloworld"))
 	micro.RegisterHandler(app.Server(), &handler.Handler{
 		HelloworldService: helloworld.NewHelloworldService(micro.NameFormat("srv.helloworld"), app.Client()),
 	})
